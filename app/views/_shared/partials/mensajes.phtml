@@ -1,0 +1,20 @@
+
+<?php if (Session::has('mensajes')): ?>
+	<div class="contenedor-de-mensajes">
+		<?php
+		$mensaje_tiempo = 8;
+		foreach (Session::get('mensajes') as $mensaje): ?>
+			<div class="mensaje-<?=$mensaje_idu=_str::uid()?>">
+				<button type="button" class="transparente" data-eliminar="padre"><img alt="<?=_('Cerrar mensaje')?>" src="/img/icons/x.svg"></button>
+				<h3>INFO</h3>
+				<p><?=$mensaje?></p>
+			</div>
+			<script>
+			setTimeout("$('.mensaje-<?=$mensaje_idu?>').fadeOut('slow', function(){ $(this).remove() })", <?=$mensaje_tiempo*1000?>);
+			</script>
+			<?php
+			++$mensaje_tiempo;
+		endforeach;
+		Session::delete('mensajes'); ?>
+	</div>
+<?php endif; ?>

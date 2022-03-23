@@ -1,0 +1,12 @@
+.transparente,
+.transparente:focus,
+.transparente:hover {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: var(--primary);
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: unset;
+}

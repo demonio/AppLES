@@ -1,0 +1,26 @@
+.contenedor-de-mensajes {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 99;
+    width: 280px;
+}
+
+.contenedor-de-mensajes>div {
+    background: var(--background);
+    border: 2px dashed var(--primary);
+    border-left: 4px solid var(--primary);
+    margin-bottom: 15px;
+    padding: 10px;
+    position: relative;
+}
+
+.contenedor-de-mensajes [data-eliminar="padre"] {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.contenedor-de-mensajes p {
+    margin-bottom: 0;
+}
