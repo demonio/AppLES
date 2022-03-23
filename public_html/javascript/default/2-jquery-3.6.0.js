@@ -1,1 +1,0 @@
-../componentes/2-jquery-3.6.0.js
