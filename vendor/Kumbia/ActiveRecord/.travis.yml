@@ -1,0 +1,33 @@
+language: php
+dist: bionic
+
+php:
+  - 7.2
+  - 7.3
+  - 7.4
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+notifications:
+  slack: kumbiaphp:51JaKQTXASwf52D8b32OyWb9
+#    irc: "irc.freenode.org#kumbiaphp"
+#    email:
+#    - xxxxx@gmail.com
+
+services:
+  - mysql
+  - postgresql
+
+before_script:
+  - "mysql -e 'DROP DATABASE IF EXISTS kumbia_test;'"
+  - "mysql -e 'create database kumbia_test;'"
+  - "psql -c 'DROP DATABASE IF EXISTS kumbia_test;' -U postgres"
+  - "psql -c 'create database kumbia_test;' -U postgres"
+                                            
+script: 
+  - phpunit --configuration tests/phpunit.xml --coverage-text --colors --coverage-clover=coverage.clover
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
