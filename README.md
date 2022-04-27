@@ -2,6 +2,7 @@
 Aplicación de las Ludo Ergo Sum para la gestión de actividades y más.
 
 ## Hecho
+- App subida a multisitio para su testeo en remoto.
 
 ## Haciendo
 - Gestión de acceso en desarrollo.
