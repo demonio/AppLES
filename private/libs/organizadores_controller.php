@@ -15,7 +15,7 @@ require_once CORE_PATH . 'kumbia/controller.php';
  * @category Kumbia
  * @package Controller
  */
-abstract class AdministradoresController extends Controller
+abstract class OrganizadoresController extends Controller
 {
     final protected function initialize()
     {
@@ -32,7 +32,7 @@ abstract class AdministradoresController extends Controller
             return false;
         }
 
-        Input::isAjax() ? View::template(null) : View::template('admin');
+        Input::isAjax() ? View::template(null) : View::template('organizadores');
 
         $this->usuario = (new Usuarios)->uno();
     }

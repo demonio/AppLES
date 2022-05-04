@@ -6,7 +6,7 @@ class UsuariosController extends AppController
     #
     public function entrar()
     {
-        if (Session::get('idu')) {
+        if (Session::get('aid')) {
             Redirect::to('/');
         }
         View::select(null, 'acceso');
@@ -15,7 +15,7 @@ class UsuariosController extends AppController
     #
     public function salir()
     {
-        Session::delete('idu');
+        Session::delete('aid');
         Redirect::to('/');
     }
     

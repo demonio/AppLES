@@ -7,7 +7,7 @@
 }
 
 .contenedor-de-mensajes>div {
-    background: var(--background);
+    background: var(--background-color);
     border: 2px dashed var(--primary);
     border-left: 4px solid var(--primary);
     margin-bottom: 15px;
@@ -19,6 +19,7 @@
     position: absolute;
     right: 10px;
     top: 10px;
+    z-index: 98;
 }
 
 .contenedor-de-mensajes p {

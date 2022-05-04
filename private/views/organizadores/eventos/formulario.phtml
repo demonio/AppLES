@@ -1,0 +1,79 @@
+
+<form class="modal evento" enctype="multipart/form-data" method="post">
+	<header>
+        <button class="transparent" data-hide=".modal, .overlay"><img alt="<?=_('Cerrar ventana')?>" src="/img/icons/x.svg"></button>
+        <h3><?=_('Evento')?></h3>
+	</header>
+    <section>
+        <div class="grid">
+            <input class="s8" name="nombre" placeholder="<?=_('Título')?>...">
+            <select class="s4" name="tipo">
+                <option value="charla"><?=_('Charla')?></option>
+                <option selected value="partida"><?=_('Partida')?></option>
+            </select>
+        </div>
+
+        <div class="grid">
+            <input type="datetime-local" name="comienza" placeholder="<?=_('Comienza')?>...">
+            <input type="datetime-local" name="termina" placeholder="<?=_('Termina')?>...">
+        </div>
+        <small>
+            &nbsp; <img alt="<?=_('Tenga presente')?>:" class="va-sub" src="/img/icons/corner-down-right.svg">
+            <b><?=_('Zona horaria de España (GMT+1)')?>.</b>
+        </small>
+        <hr>
+
+        <label><?=_('Participantes')?>...</label>
+        <div class="grid">
+            <div>
+                <label><?=_('Mínimo')?>: <span class="participantes_min">2</span></label>
+                <input type="range" min="0" max="9" value="2" name="participantes_min">
+            </div>
+            <div>
+                <label><?=_('Máximo')?>: <span class="participantes_max">5</span></label>
+                <input type="range" min="0" max="9" value="5" name="participantes_max">
+            </div>
+        </div>
+
+        <div class="grid baseline sistema">
+            <input name="sistema" placeholder="<?=_('Sistema')?>...">
+            <label for="switch">
+                <?=_('Original')?>
+                <input type="checkbox" name="sistema_propio" role="switch">
+                <?=_('Propio')?>
+            </label>
+        </div>
+
+        <input name="apodo" placeholder="<?=_('Tu nick en Discord')?>...">
+
+        <textarea name="descripcion" placeholder="<?=_('Sinopsis, herramientas y otros detalles')?>..."></textarea>
+
+        <div class="grid">
+            <label for="switch">
+                <input type="checkbox" name="emitida" role="switch">
+                <?=_('Emitida')?>
+            </label>
+            <label for="switch">
+                <input type="checkbox" name="menores" role="switch">
+                <?=_('Menores')?> ✓
+            </label>
+            <label for="switch">
+                <input type="checkbox" name="novatos" role="switch">
+                <?=_('Novatos')?> ✓
+            </label>
+        </div>
+        <hr>
+
+        <label><?=_('Imagen')?>...</label>
+		<div class="dropimage">
+			<input type="file" name="imagenes[]" multiple>
+			<button type="button" class="transparent tr-15" data-remove="parent"><img alt="<?=_('Quitar foto')?>" src="/img/icons/x-square.svg"></button>
+        </div>
+    </section>
+    <br>
+    <footer class="grid">
+        <button type="submit" name="action" value="crear"><?=_('Crear')?></button>
+    </footer>
+    <br>
+</form>
+<div class="overlay"></div>

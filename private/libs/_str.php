@@ -10,7 +10,7 @@ class _str
     }
 
     # ID único
-	static public function uid()
+	static public function aid()
 	{
         return substr(md5(microtime()), 0, 11);
     }

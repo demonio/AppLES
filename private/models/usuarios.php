@@ -6,7 +6,7 @@ class Usuarios extends LiteRecord
     #
     public function entrar($datos)
     {  
-        $sql = 'SELECT idu, clave FROM usuarios WHERE correo=? AND validado=1';
+        $sql = 'SELECT aid, clave FROM usuarios WHERE correo=? AND validado=1';
         $usuario = self::first($sql, [$datos['correo']]);
         if ( ! $usuario) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
@@ -18,7 +18,7 @@ class Usuarios extends LiteRecord
             return false;
         }
 
-        Session::set('idu', $usuario->idu);
+        Session::set('aid', $usuario->aid);
 
         Session::setArray('mensajes', _('Bienvenido.'));
     }
@@ -26,7 +26,7 @@ class Usuarios extends LiteRecord
     #
     public function borrarse($datos)
     {  
-        $sql = 'SELECT idu, clave FROM usuarios WHERE correo=? OR correo=""';
+        $sql = 'SELECT aid, clave FROM usuarios WHERE correo=? OR correo=""';
         $usuario = self::first($sql, [$datos['correo']]);
         if ( ! $usuario) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
@@ -42,7 +42,7 @@ class Usuarios extends LiteRecord
 
         self::query($sql, [$datos['correo']]);
 
-        Session::delete('idu');
+        Session::delete('aid');
 
         Session::setArray('mensajes', _('Se ha eliminado el usuario.'));
     }
@@ -72,7 +72,7 @@ class Usuarios extends LiteRecord
             return false;
         }
 
-        if (strlen($datos['apodo'] < 3)) {
+        if (strlen($datos['apodo']) < 3) {
             Session::setArray('mensajes', _('Se requiere un apodo de al menos 3 caracteres.'));
             return false;
         }
@@ -82,7 +82,7 @@ class Usuarios extends LiteRecord
             return false;
         }
 
-        $datos['idu'] = _str::uid();
+        $datos['aid'] = _str::aid();
 
         $datos['clave'] = password_hash($datos['clave'], PASSWORD_DEFAULT);
 
@@ -92,13 +92,13 @@ class Usuarios extends LiteRecord
 
         $this->create($datos);
 
-        $mensaje = _('Pulse en el siguiente enlace para deja en blanco su clave: ');
+        $mensaje = _("Pulse en el siguiente enlace para confirmar su cuenta en la aplicación:\n\n");
 
         $mensaje .= $_SERVER['HTTP_HOST'] . '/usuarios/validar/' . base64_encode($datos['clave']);
 
-        exit($mensaje);
+        #exit($mensaje);
 
-        _mail::send($datos['correo'], _('Confirme su correo en AppLES'), $mensaje);
+        _mail::send($datos['correo'], _('Confirme su cuenta en su correo electrónico'), $mensaje);
 
         Session::setArray('mensajes', _('Acuda a su cliente de correo.'));
     }
@@ -121,11 +121,11 @@ class Usuarios extends LiteRecord
     }
 
     #
-    public function uno($idu=0)
+    public function uno($aid=0)
     {
-        $idu = empty($idu) ? Session::get('idu') : $idu;
-        $sql = 'SELECT * FROM usuarios WHERE idu=?';
-        return self::first($sql, [$idu]);
+        $aid = empty($aid) ? Session::get('aid') : $aid;
+        $sql = 'SELECT * FROM usuarios WHERE aid=?';
+        return self::first($sql, [$aid]);
     }
 
     #
