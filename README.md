@@ -20,3 +20,15 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Correo al aceptar evento.
 - Buscador de eventos.
 - Paginación de eventos.
+- Redirigir a la pestaña del formulario que produjo una excepción.
+- Colocar el ojo de mostrar contraseña a la izquierda de texto.
+- Avisar del que los correos pueden llegar a spam.
+- Revisar línea 45 al borrarse.
+- Quitar el límite de ancho de la cartelera ya que las etiquetas se solapan.
+- Listar eventos al pinchar una etiqueta.
+- Poner aid y código de barras junto al apodo del usuario. 
+- Ocultar en el menú las secciones de los otros roles.
+- Comprobar que la fecha fin es posterior a la de inicio.
+- Al modificar un evento, el moderador debe volver a aceptar el evento.
+- Probar inscribir menores.
+- Poner turno mañana y tarde en el formulario del evento.

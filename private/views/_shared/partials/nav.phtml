@@ -31,7 +31,10 @@ $controllers = [
 	</ul>
 	<?php if ($usuario->id): ?>
 		<ul>
-			<li><?=_('Bienvenido')?> <span class="nowrap"><?=$usuario->apodo?></span></li>
+			<li>
+				<?=_('Bienvenido')?> <span class="nowrap"><?=$usuario->apodo?></span>
+				<br><b>ID:</b> <?=$usuario->id?>
+			</li>
 			<li><a role="button" class="outline" href="/usuarios/salir"><?=_('¿Salir?')?></a></li>
 		</ul>
 	<?php else: ?>

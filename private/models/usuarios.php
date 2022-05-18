@@ -14,7 +14,7 @@ class Usuarios extends LiteRecord
         }
 
         if ( ! $usuario->clave) {
-            if (strlen($datos['clave'] < 12)) {
+            if (strlen($datos['clave']) < 12) {
                 Session::setArray('mensajes', _('Se requiere una clave de al menos 12 caracteres.'));
                 return false;
             }
@@ -66,7 +66,7 @@ class Usuarios extends LiteRecord
     #
     public function registrar($datos)
     {  
-        if ( ! $datos['politicas']) {
+        if (empty($datos['politicas'])) {
             Session::setArray('mensajes', _('Por favor, acepte las políticas.'));
             return false;
         }
@@ -76,7 +76,7 @@ class Usuarios extends LiteRecord
             return false;
         }
 
-        if (strlen($datos['clave'] < 12)) {
+        if (strlen($datos['clave']) < 12) {
             Session::setArray('mensajes', _('Se requiere una clave de al menos 12 caracteres.'));
             return false;
         }
@@ -154,7 +154,7 @@ class Usuarios extends LiteRecord
         $subject = _('Resetear la clave');
         $body = implode("\n\n", $body);
 
-        mail($to, $subject, $body);
+        _mail::send($to, $subject, $body);
 
         Session::setArray('mensajes', _('Acuda a su cliente de correo.'));
     }
