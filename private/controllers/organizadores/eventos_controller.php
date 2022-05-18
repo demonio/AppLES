@@ -1,7 +1,7 @@
 <?php
 /**
  */
-class EventosController extends OrganizadoresController
+class EventosController extends RegistradosController
 {
     #
 	protected function before_filter()
@@ -17,17 +17,34 @@ class EventosController extends OrganizadoresController
     #
     public function index()
     {
-        $this->mis_eventos = (new Eventos)->misEventos();
+        $this->eventos = (new Eventos)->misEventos();
     }
 
     #
-    public function formulario()
+    public function formulario($aid='')
     {
+        $this->evento = (new Eventos)->miEvento($aid);
+    }
+
+    #
+    public function borrar()
+    {
+        (new Eventos)->borrarEvento($_POST);
+        Redirect::to('/organizadores/eventos');
     }
 
     #
     public function crear()
     {
-        (new Eventos)->crearEvento($_POST);
+        unset($_POST['aid']);
+        (new Eventos)->salvarEvento($_POST);
+        Redirect::to('/organizadores/eventos');
+    }
+
+    #
+    public function editar()
+    {
+        (new Eventos)->salvarEvento($_POST);
+        Redirect::to('/organizadores/eventos');
     }
 }

@@ -1,21 +1,21 @@
 
-<form class="modal evento" enctype="multipart/form-data" method="post">
+<form action="/organizadores/eventos" class="modal evento" enctype="multipart/form-data" method="post">
 	<header>
-        <button class="transparent" data-hide=".modal, .overlay"><img alt="<?=_('Cerrar ventana')?>" src="/img/icons/x.svg"></button>
+        <button type="button" class="transparent" data-hide=".modal, .overlay"><img alt="<?=_('Cerrar ventana')?>" src="/img/icons/x.svg"></button>
         <h3><?=_('Evento')?></h3>
 	</header>
     <section>
         <div class="grid">
-            <input class="s8" name="nombre" placeholder="<?=_('Título')?>...">
+            <input class="s8" name="nombre" placeholder="<?=_('Título')?>..." value="<?=$evento->nombre?>">
             <select class="s4" name="tipo">
-                <option value="charla"><?=_('Charla')?></option>
-                <option selected value="partida"><?=_('Partida')?></option>
+                <option <?=($evento->tipo==='charla')?'selected':''?>value="charla"><?=_('Charla')?></option>
+                <option <?=( ! $evento->tipo || $evento->tipo==='partida')?'selected':''?> value="partida"><?=_('Partida')?></option>
             </select>
         </div>
 
         <div class="grid">
-            <input type="datetime-local" name="comienza" placeholder="<?=_('Comienza')?>...">
-            <input type="datetime-local" name="termina" placeholder="<?=_('Termina')?>...">
+            <input type="datetime-local" name="comienza" placeholder="<?=_('Comienza')?>..." value="<?=$evento->comienza?str_replace(' ', 'T', date('Y-m-d H:i', strtotime($evento->comienza))):str_replace(' ', 'T', date('Y-m-d H:i'))?>">
+            <input type="datetime-local" name="termina" placeholder="<?=_('Termina')?>..." value="<?=$evento->termina?str_replace(' ', 'T', date('Y-m-d H:i', strtotime($evento->termina))):str_replace(' ', 'T', date('Y-m-d H:i'))?>">
         </div>
         <small>
             &nbsp; <img alt="<?=_('Tenga presente')?>:" class="va-sub" src="/img/icons/corner-down-right.svg">
@@ -26,53 +26,69 @@
         <label><?=_('Participantes')?>...</label>
         <div class="grid">
             <div>
-                <label><?=_('Mínimo')?>: <span class="participantes_min">2</span></label>
-                <input type="range" min="0" max="9" value="2" name="participantes_min">
+                <label><?=_('Mínimo')?>: <span class="participantes_min"><?=$evento->participantes_min?:2?></span></label>
+                <input type="range" min="0" max="9" value="<?=$evento->participantes_min?:2?>" name="participantes_min">
             </div>
             <div>
-                <label><?=_('Máximo')?>: <span class="participantes_max">5</span></label>
-                <input type="range" min="0" max="9" value="5" name="participantes_max">
+                <label><?=_('Máximo')?>: <span class="participantes_max"><?=$evento->participantes_max?:5?></span></label>
+                <input type="range" min="0" max="9" value="<?=$evento->participantes_max?:5?>" name="participantes_max">
             </div>
         </div>
 
         <div class="grid baseline sistema">
-            <input name="sistema" placeholder="<?=_('Sistema')?>...">
+            <input name="sistema" placeholder="<?=_('Sistema')?>..." value="<?=$evento->sistema?>">
             <label for="switch">
                 <?=_('Original')?>
-                <input type="checkbox" name="sistema_propio" role="switch">
+                <input type="checkbox" <?=empty($evento->sistema)?'':'checked'?> name="etiquetas[]" value="sistema_propio" role="switch">
                 <?=_('Propio')?>
             </label>
         </div>
 
-        <input name="apodo" placeholder="<?=_('Tu nick en Discord')?>...">
+        <input name="apodo" placeholder="<?=_('Tu apodo en Discord')?>..." value="<?=$evento->apodo?>">
 
-        <textarea name="descripcion" placeholder="<?=_('Sinopsis, herramientas y otros detalles')?>..."></textarea>
+        <textarea name="descripcion" placeholder="<?=_('Sinopsis, herramientas y otros detalles')?>..."><?=$evento->descripcion?></textarea>
 
         <div class="grid">
             <label for="switch">
-                <input type="checkbox" name="emitida" role="switch">
+                <input type="checkbox" <?=strstr($evento->etiquetas, '[emitida]')?'checked':''?> name="etiquetas[]" value="emitida" role="switch">
                 <?=_('Emitida')?>
             </label>
             <label for="switch">
-                <input type="checkbox" name="menores" role="switch">
+                <input type="checkbox" <?=strstr($evento->etiquetas, '[menores_ok]')?'checked':''?> name="etiquetas[]" value="menores_ok" role="switch">
                 <?=_('Menores')?> ✓
             </label>
             <label for="switch">
-                <input type="checkbox" name="novatos" role="switch">
+                <input type="checkbox" <?=strstr($evento->etiquetas, '[novatos_ok]')?'checked':''?> name="etiquetas[]" value="novatos_ok" role="switch">
                 <?=_('Novatos')?> ✓
             </label>
         </div>
         <hr>
 
         <label><?=_('Imagen')?>...</label>
-		<div class="dropimage">
-			<input type="file" name="imagenes[]" multiple>
-			<button type="button" class="transparent tr-15" data-remove="parent"><img alt="<?=_('Quitar foto')?>" src="/img/icons/x-square.svg"></button>
-        </div>
+        <?php if (empty($evento->imagenes)): ?>
+            <div class="dropimage">
+                <input type="file" name="imagenes[]" multiple>
+                <button type="button" class="transparent tr-15" data-remove="parent"><img alt="<?=_('Quitar foto')?>" src="/img/icons/x-square.svg"></button>
+                <input type="hidden" name="imagenes_guardadas[]" value="<?=$evento->imagenes?>">
+            </div>
+        <?php else: ?>
+            <label class="dropimage dropnocontent" style="background:url(/img/users/<?=$evento->imagenes?>) center no-repeat; background-size:cover">
+                <input type="file" name="imagenes[]" multiple>
+                <button type="button" class="transparent tr-15" data-remove="parent"><img alt="<?=_('Quitar foto')?>" src="/img/icons/x-square.svg"></button>
+                <input type="hidden" name="imagenes_guardadas[]" value="<?=$evento->imagenes?>">
+            </label>
+        <?php endif; ?>
     </section>
     <br>
     <footer class="grid">
-        <button type="submit" name="action" value="crear"><?=_('Crear')?></button>
+        <?php if ($evento->aid): ?>
+            <button type="submit" class="outline" name="action" value="borrar"><?=_('Borrar')?></button>
+            <button type="submit"" class="outline" name="action" value="crear"><?=_('Clonar')?></button>
+            <button type="submit" name="action" value="editar"><?=_('Editar')?></button>
+            <input type="hidden" name="aid" value="<?=$evento->aid?>">
+        <?php else: ?>
+            <button type="submit" name="action" value="crear"><?=_('Crear')?></button>
+        <?php endif; ?>
     </footer>
     <br>
 </form>

@@ -1,0 +1,37 @@
+aside {
+    background: var(--primary-inverse);
+    box-shadow: var(--card-shadow);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 98;
+    height: 100%;
+    width: 235px;
+    overflow-y: auto;
+}
+
+aside a img,
+aside button img {
+    margin-right: 10px;
+}
+
+aside h6 {
+    padding: 15px 20px 5px 15px;
+}
+
+aside .sub {
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+aside a[role="button"],
+aside button {
+    margin: 5px 10px;
+    padding: 10px 0;
+    width: calc(100% - 20px);
+}
+
+aside .info {
+    padding: 10px;
+    font-size: 80%;
+}

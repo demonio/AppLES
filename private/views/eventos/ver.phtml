@@ -1,0 +1,59 @@
+<?php
+$tipos = [
+	'charla'=>_('Charla'),
+	'partida'=>_('Partida'),
+];
+?>
+<article>
+    <header>
+        <h1><?=$evento->nombre?></h1>
+        <br>
+    </header>
+
+    <?php if ($evento->imagenes): ?>
+        <img src="/img/users/<?=$evento->imagenes?>">
+    <?php elseif ($evento->tipo === 'charla'): ?>
+        <img src="/img/app/charla.jpg">
+    <?php elseif ($evento->tipo === 'partida'): ?>
+        <img src="/img/app/partida.jpg">
+    <?php endif; ?>
+
+    <section>
+        <?=Html::tags('/partidas/etiqueta/', $evento->etiquetas); ?><br>
+        <br>
+        <p><?=nl2br(h($evento->descripcion))?></p>
+
+        <ul>
+            <li><b><?=_('Evento')?>:</b> <?=$tipos[$evento->tipo]?></li>
+            <li><b><?=_('Sistema')?>:</b> <?=$evento->sistema?></li>
+            <li><b><?=_('Organizador')?>:</b> <?=$evento->apodo?></li>
+            <li>
+                <b><?=_('Participantes')?>:</b>
+                <?=$evento->participantes_min?>
+                <?=empty($evento->participantes_max)
+                    ?'':"- $evento->participantes_max"?>
+            </li> 
+            <li><b><?=_('Comienza')?>:</b> <?=date('H:i d-m-Y', strtotime($evento->comienza))?></li>
+            <li><b><?=_('Termina')?>:</b> <?=date('H:i d-m-Y', strtotime($evento->termina))?></li>
+            <li><b><?=_('Aceptada')?>:</b> <?=empty($evento->aceptado)?_('No'):_('Sí')?></li>
+        </ul>
+    </section>
+
+    <footer class="grid">
+        <?php if ( ! $evento->aceptado && $usuario->rol > 2): ?>
+            <a role="button" href="/moderadores/eventos/aceptar/<?=$evento->aid?>"><?=_('Aceptar')?></a>
+        <?php endif; ?>
+
+        <?php if ($evento->organizador === $usuario->aid): ?>
+            <a role="button" data-ajax=".ajax.show" href="/organizadores/eventos/formulario/<?=$evento->aid?>"><?=_('Editar')?></a>
+        <?php endif; ?>
+
+        <?php if ($evento->aceptado): ?>
+            <?php if ($apuntado): ?>
+                <a role="button" href="/participantes/reservas/desapuntarse/<?=$evento->aid?>"><?=_('Desapuntarse')?></a>
+            <?php else: ?>
+                <a role="button" href="/participantes/reservas/apuntarse/<?=$evento->aid?>"><?=_('Apuntarse')?></a>
+            <?php endif; ?>
+        <?php endif; ?>
+    </footer>
+</article>

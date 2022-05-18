@@ -1,0 +1,46 @@
+
+<aside style="display:none">
+	<a role="button" class="outline left" href="/" title="<?=_('Portada')?>"><img alt="<?=_('Portada')?>" src="/img/icons/home.svg"> <?=_('Portada')?></a>
+
+	<a role="button" class="outline left" href="/eventos" title="<?=_('Eventos')?>"><img alt="<?=_('Eventos')?>" src="/img/icons/circle.svg"> <?=_('Eventos')?></a>
+
+	<a role="button" class="outline left participantes roles" data-active=".roles" data-toggle=".participantes" href="#participantes" title="<?=_('Rol Participantes')?>"><img alt="<?=_('Rol Participantes')?>" src="/img/icons/plus.svg"> <?=_('Participantes')?></a>
+	<a role="button" class="outline left participantes roles" data-active=".roles" data-toggle=".participantes" href="#participantes" title="<?=_('Rol Participantes')?>" style="display:none"><img alt="<?=_('Rol Participantes')?>" src="/img/icons/minus.svg"> <?=_('Participantes')?></a>
+	<div class="participantes sub" style="display:none">
+		<a role="button" class="secondary outline left" rel="nofollow" href="/participantes/reservas" title="<?=_('Mis reservas')?>"><img alt="<?=_('Mis reservas')?>" src="/img/icons/s.corner-down-right.svg"> <small><?=_('Mis reservas')?></small></a>
+	</div>
+
+	<a role="button" class="outline left organizadores roles" data-active=".roles" data-toggle=".organizadores" href="#organizadores" title="<?=_('Rol Organizadores')?>"><img alt="<?=_('Rol Organizadores')?>" src="/img/icons/plus.svg"> <?=_('Organizadores')?></a>
+	<a role="button" class="outline left organizadores roles" data-active=".roles" data-toggle=".organizadores" href="#organizadores" title="<?=_('Rol Organizadores')?>" style="display:none"><img alt="<?=_('Rol Organizadores')?>" src="/img/icons/minus.svg"> <?=_('Organizadores')?></a>
+	<div class="organizadores sub" style="display:none">
+		<a role="button" class="secondary outline left" rel="nofollow" href="/organizadores/eventos" title="<?=_('Mis eventos')?>"><img alt="<?=_('Mis eventos')?>" src="/img/icons/s.corner-down-right.svg"> <small><?=_('Mis eventos')?></small></a>
+	</div>
+
+	<a role="button" class="outline left moderadores roles" data-active=".roles" data-toggle=".moderadores" href="#moderadores" title="<?=_('Rol Moderadores')?>"><img alt="<?=_('Rol Moderadores')?>" src="/img/icons/plus.svg"> <?=_('Moderadores')?></a>
+	<a role="button" class="outline left moderadores roles" data-active=".roles" data-toggle=".moderadores" href="#moderadores" title="<?=_('Rol Moderadores')?>" style="display:none"><img alt="<?=_('Rol Moderadores')?>" src="/img/icons/minus.svg"> <?=_('Moderadores')?></a>
+	<div class="moderadores sub" style="display:none">
+		<a role="button" class="secondary outline left" rel="nofollow" href="/moderadores/eventos" title="<?=_('Eventos por aceptar')?>"><img alt="<?=_('Eventos por aceptar')?>" src="/img/icons/s.corner-down-right.svg"> <small><?=_('Eventos x aceptar')?></small></a>
+	</div>
+
+	<a role="button" class="outline left administradores roles" data-active=".roles" data-toggle=".administradores" href="#administradores" title="<?=_('Rol Administradores')?>"><img alt="<?=_('Rol Administradores')?>" src="/img/icons/plus.svg"> <?=_('Administradores')?></a>
+	<a role="button" class="outline left administradores roles" data-active=".roles" data-toggle=".administradores" href="#administradores" title="<?=_('Rol Administradores')?>" style="display:none"><img alt="<?=_('Rol Administradores')?>" src="/img/icons/minus.svg"> <?=_('Administradores')?></a>
+	<div class="administradores sub" style="display:none">
+		<a role="button" class="secondary outline left" rel="nofollow" href="/administradores/panel" title="<?=_('Panel de control')?>"><img alt="<?=_('Panel de control')?>" src="/img/icons/s.corner-down-right.svg"> <small><?=_('Panel de control')?></small></a>
+	</div>
+
+	<hr>
+	<div class="info">
+		<b><?=_('Memoria usada')?>:</b> <?=number_format(memory_get_usage()/1048576, 2, '.', '') . ' MB'?><br>
+		<b><?=_('Tiempo de carga')?>:</b> <?=number_format(microtime(1)-$_SERVER['REQUEST_TIME_FLOAT'], 3, '.', '') . '"'?>
+		<button type="button" class="outline left IP" data-toggle=".IP">
+			<?=_('¿Mostrar IP?')?>
+		</button>
+		<span class="IP" style="display:none">
+			<br><b><?=_('Tu')?> IP:</b> <?=$_SERVER['REMOTE_ADDR']?><br>
+		</span>
+		<b><?=_('Impulsado por')?>:</b>
+		<a role="button" class="outline left" href="https://roleplus.app" target="_blank"><?=_('ROLEplus')?></a>
+		<a role="button" class="outline left" href="https://kumbiaphp.com" target="_blank"><?=_('KumbiaPHP')?></a>
+	</div>
+</aside>
+<div class="overlay aside" data-hide="aside, .overlay" style="display:none"></div>

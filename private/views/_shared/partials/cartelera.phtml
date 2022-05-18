@@ -1,0 +1,60 @@
+<?php
+$eventos = View::getVar('eventos');
+$apuntados = View::getVar('apuntados');
+?>
+<div id="grid" class="cartelera" data-columns>
+    <?php foreach ($eventos as $eve):
+        $imagen = explode(', ', $eve->imagenes)[0];
+        $b = strftime('%b', strtotime($eve->comienza));
+        $d = date('d', strtotime($eve->comienza));
+        $hi = date('H:i', strtotime($eve->comienza));
+        $fecha_desde = new DateTime($eve->comienza);
+        $fecha_hasta = new DateTime($eve->termina);
+        $intervalo = $fecha_desde->diff($fecha_hasta);
+        $h = $intervalo->format('%h');
+        $i = $intervalo->format('%i');
+        $n_apuntados = empty($apuntados[$eve->aid]) ? 0 : count($apuntados[$eve->aid]);
+        ?>
+        <article>
+            <a href="/eventos/ver/<?=$eve->aid?>">
+                <?php if ( ! $eve->aceptado): ?>
+                    <div class="por-aceptar"><?=_('Por aceptar')?></div>
+                    <div class="por-aceptar-velo"></div>
+                <?php endif; ?>
+                <div class="fecha">
+                    <p><?=$b?></p>
+                    <p><?=$d?></p>
+                    <p><b><?=$hi?></b></p>
+                </div>
+                <div class="duracion">
+                    <p><?=($h)?"$h".'h':''?> <?=($i)?"$i'":''?></p>
+                </div>
+                <?php if ($eve->participantes_max === $n_apuntados): ?>
+                    <div class="llena" style="transform:rotate(<?=rand(0,60)-30?>deg)">
+                        <p><?=_('Mesa llena')?></p>
+                    </div>
+                <?php else: ?>
+                    <div class="libre" style="transform:rotate(<?=rand(0,60)-30?>deg)">
+                        <p>
+                            <?=_('Libre')?>
+                            <?="$n_apuntados/$eve->participantes_max"?>
+                        </p>
+                    </div>
+                <?php endif; ?>
+                <div class="velo">&nbsp;</div>
+                <div class="info">
+                    <h2><?=$eve->nombre?> <small></small></h2>
+                    <p><em>by <?=$eve->apodo?></em></p>
+                    <p><?=$eve->descripcion?></p>
+                </div>
+                <?php if ($imagen): ?>
+                    <img src="/img/users/<?=$imagen?>">
+                <?php elseif ($eve->tipo === 'charla'): ?>
+                    <img src="/img/app/charla.jpg">
+                <?php elseif ($eve->tipo === 'partida'): ?>
+                    <img src="/img/app/partida.jpg">
+                <?php endif; ?>
+            </a>
+        </article>
+    <?php endforeach; ?>
+</div>

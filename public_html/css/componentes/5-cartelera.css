@@ -1,0 +1,150 @@
+.cartelera article {
+    background: #444;
+    min-height: 300px;
+    padding: 0;
+    position: relative;
+}
+
+.cartelera article div {
+    position: absolute;
+}
+
+.cartelera article .fecha {
+    background: yellow;
+    border: 4px solid black;
+    border-bottom-right-radius: 15px;
+    padding: 5px;
+    left: 10px;
+    top: 10px;
+}
+
+.cartelera article p {
+    margin-bottom: 0;
+}
+
+.cartelera article .fecha p {
+    color: red;
+}
+
+.cartelera article .fecha p:nth-child(1) {
+    font-size: 18px;
+    line-height: 11px;
+}
+
+.cartelera article .fecha p:nth-child(2) {
+    font-size: 30px;
+    line-height: 33px;
+}
+
+.cartelera article .fecha p:nth-child(3) {
+    font-size: 12px;
+    line-height: 11px;
+}
+
+.cartelera article .por-aceptar {
+    background: orangered;
+    border: 4px solid black;
+    border-radius: 0 0 15px 15px;
+    border-top: 0;
+    color: black;
+    font-size: 21px;
+    font-weight: 700;
+    left: 50%;
+    line-height: 22px;
+    padding: 5px;
+    top: 0;
+    transform: translate(-50%, 0);
+    z-index: 2;
+}
+
+.cartelera article .por-aceptar-velo {
+    background: #444;
+    height: 100%;
+    opacity: .5;
+    width: 100%;
+    z-index: 1;
+}
+
+.cartelera article .duracion {
+    padding: 5px;
+    background: yellow;
+    border: 4px solid black;
+    border-radius: 15px;
+    right: 10px;
+    top: 10px;
+}
+
+.cartelera article .duracion p {
+    color: red;
+    font-size: 21px;
+    line-height: 22px;
+}
+
+.cartelera article .libre,
+.cartelera article .llena {
+    padding: 5px;
+    border: 4px solid black;
+    border-bottom-right-radius: 15px;
+    left: 125px;
+    top: 50px;
+}
+
+.cartelera article .libre {
+    background: limegreen;
+}
+
+.cartelera article .llena {
+    background: red;
+}
+
+.cartelera article .libre p,
+.cartelera article .llena p {
+    color: black;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.cartelera article .velo {
+    bottom: 25px;
+    background: #444;
+    height: 80px;
+    left: 0;
+    opacity: .75;
+    width: 100%;
+}
+
+.cartelera article .info {
+    bottom: 15px;
+    height: 80px;
+    left: 0;
+    width: 100%;
+}
+
+.cartelera article .info h2,
+.cartelera article .info p {
+    left: 0;
+    line-height: 20px;
+    overflow: hidden;
+    padding: 0 15px;
+    text-align: left !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.cartelera article .info h2 {
+    bottom: 60px;
+    color: yellow;
+    font-size: 1.25rem;
+}
+
+.cartelera article .info p {
+    bottom: 40px;
+    color: white;
+    display: block;
+}
+
+.cartelera article .info p em {
+    color: orangered;
+    font-size: 14px;
+}

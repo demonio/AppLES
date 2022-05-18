@@ -13,6 +13,13 @@ class UsuariosController extends AppController
     }
     
     #
+    public function reseteada($clave)
+    {
+        (new Usuarios)->reseteada($clave);
+        Redirect::to('/usuarios/entrar');
+    }
+    
+    #
     public function salir()
     {
         Session::delete('aid');
@@ -25,5 +32,4 @@ class UsuariosController extends AppController
         (new Usuarios)->validar($clave);
         Redirect::to('/usuarios/entrar');
     }
-
 }

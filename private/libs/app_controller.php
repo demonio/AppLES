@@ -1,23 +1,14 @@
 <?php
-/**
- * @see Controller nuevo controller
- */
 require_once CORE_PATH . 'kumbia/controller.php';
-
 /**
- * Controlador principal que heredan los controladores
- *
- * Todos las controladores heredan de esta clase en un nivel superior
- * por lo tanto los métodos aquií definidos estan disponibles para
- * cualquier controlador.
- *
- * @category Kumbia
- * @package Controller
  */
 abstract class AppController extends Controller
 {
     final protected function initialize()
     {
+        # Autologin con galleta
+
+        # Permitir login
         if (Input::post('usuario')) {
             if (preg_match('/(borrarse|entrar|registrar|resetear)/', Input::post('usuario'))) {
                 $accion = Input::post('usuario');
@@ -25,12 +16,12 @@ abstract class AppController extends Controller
             }
         }
         
-        Input::isAjax() ? View::template(null) : View::template('default');
+        Input::isAjax() ? View::template('ajax') : View::template('default');
+
+        $this->usuario = (new Usuarios)->uno();
     }
 
     final protected function finalize()
     {
-        
     }
-
 }

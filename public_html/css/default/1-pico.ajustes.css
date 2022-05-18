@@ -16,3 +16,7 @@ h6 {
 #importante header {
     margin-bottom: 3rem;
 }
+
+nav button {
+    padding: var(--nav-link-spacing-vertical) var(--nav-link-spacing-horizontal) !important;
+}

@@ -1,54 +1,6 @@
 
-<a data-ajax=".ajax.show" href="/organizadores/eventos/formulario" role="button"><?=_('Crear evento')?></a><br>
-<br>
-<div id="grid" class="cartelera" data-columns>
-    <?php foreach ($mis_eventos as $car):
-        if ( ! $car->imagenes) {
-            continue;
-        }
-        $imagen = explode(', ', $car->imagenes)[0];
-        $b = strftime('%b', strtotime($car->comienza));
-        $d = date('d', strtotime($car->comienza));
-        $hi = date('H:i', strtotime($car->comienza));
-        $fecha_desde = new DateTime($car->comienza);
-        $fecha_hasta = new DateTime($car->termina);
-        $intervalo = $fecha_desde->diff($fecha_hasta);
-        $h = $intervalo->format('%h');
-        $i = $intervalo->format('%i');
-        #$apuntados = count($apuntados[$car->idu]);
-        $apuntados = 0;
-        ?>
-        <article>
-            <a href="/eventos/ver/partidas/<?=$car->aid?>" rel="noopener noreferrer" target="_blank">
-                <div class="fecha">
-                    <p><?=$b?></p>
-                    <p><?=$d?></p>
-                    <p><b><?=$hi?></b></p>
-                </div>
-                <div class="duracion">
-                    <p><?=($h)?"$h".'h':''?> <?=($i)?"$i'":''?></p>
-                </div>
-                <?php if ($car->participantes_max === $apuntados): ?>
-                    <div class="llena" style="transform:rotate(<?=rand(0,60)-30?>deg)">
-                        <p>
-                            <?=_('Mesa llena')?>
-                        </p>
-                    </div>
-                <?php else: ?>
-                    <div class="libre" style="transform:rotate(<?=rand(0,60)-30?>deg)">
-                        <p>
-                            <?=_('Libre')?>
-                            <?="$apuntados/$car->participantes_max"?>
-                        </p>
-                    </div>
-                <?php endif; ?>
-                <div class="velo">&nbsp;</div>
-                <div class="info">
-                    <h2><?=$car->nombre?> <small><em>by <?=$car->apodo?></em></small></h2>
-                    <p><?=$car->descripcion?></p>
-                </div>
-                <img src="/img/users/<?=$imagen?>">
-            </a>
-        </article>
-    <?php endforeach; ?>
+<div class="center">
+    <a data-ajax=".ajax.show" href="/organizadores/eventos/formulario" role="button"><?=_('Crear evento')?></a>
 </div>
+<br>
+<?php View::partial('cartelera'); ?>

@@ -1,0 +1,28 @@
+article {
+    margin: 0 0 25px;
+    padding: 0;
+}
+
+article img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    margin: 0 !important;
+    padding: 25.6px 25.6px 0 !important;
+}
+
+header h1 {
+    text-align: center;
+}
+
+section {
+    padding: 0 25.6px;
+    text-align: left;
+}
+
+footer {
+    padding: 0 25.6px 25.6px !important;
+}

@@ -1,0 +1,20 @@
+.tabs {
+    padding-left: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.tabs a {
+    border: 2px solid transparent;
+    border-bottom: 2px solid var(--primary);
+    border-radius: 15px 15px 0 0;
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+}
+
+.tabs a.active {
+    background: transparent;
+    border: 2px solid var(--primary);
+    border-bottom: 2px solid transparent;
+}

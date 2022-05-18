@@ -7,13 +7,22 @@ class Usuarios extends LiteRecord
     public function entrar($datos)
     {  
         $sql = 'SELECT aid, clave FROM usuarios WHERE correo=? AND validado=1';
-        $usuario = self::first($sql, [$datos['correo']]);
+        $usuario = parent::first($sql, [$datos['correo']]);
         if ( ! $usuario) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
             return false;
         }
 
-        if ( ! password_verify($datos['clave'], $usuario->clave)) {
+        if ( ! $usuario->clave) {
+            if (strlen($datos['clave'] < 12)) {
+                Session::setArray('mensajes', _('Se requiere una clave de al menos 12 caracteres.'));
+                return false;
+            }
+            $datos['clave'] = password_hash($datos['clave'], PASSWORD_DEFAULT);
+            $sql = 'UPDATE usuarios SET clave=? WHERE correo=?';
+            parent::query($sql, [$datos['clave'], $datos['correo']]);
+        }
+        elseif ( ! password_verify($datos['clave'], $usuario->clave)) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
             return false;
         }
@@ -27,7 +36,7 @@ class Usuarios extends LiteRecord
     public function borrarse($datos)
     {  
         $sql = 'SELECT aid, clave FROM usuarios WHERE correo=? OR correo=""';
-        $usuario = self::first($sql, [$datos['correo']]);
+        $usuario = parent::first($sql, [$datos['correo']]);
         if ( ! $usuario) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
             return false;
@@ -40,7 +49,7 @@ class Usuarios extends LiteRecord
 
         $sql = 'DELETE FROM usuarios WHERE correo=?';
 
-        self::query($sql, [$datos['correo']]);
+        parent::query($sql, [$datos['correo']]);
 
         Session::delete('aid');
 
@@ -51,7 +60,7 @@ class Usuarios extends LiteRecord
     public function comprobarSiExisteCorreo($datos)
     {
         $sql = 'SELECT id FROM usuarios WHERE correo=?';
-        return self::first($sql, [$datos['correo']]);
+        return parent::first($sql, [$datos['correo']]);
     }
 
     #
@@ -96,36 +105,66 @@ class Usuarios extends LiteRecord
 
         $mensaje .= $_SERVER['HTTP_HOST'] . '/usuarios/validar/' . base64_encode($datos['clave']);
 
-        #exit($mensaje);
-
         _mail::send($datos['correo'], _('Confirme su cuenta en su correo electrónico'), $mensaje);
 
         Session::setArray('mensajes', _('Acuda a su cliente de correo.'));
     }
 
     #
-    public function resetear($clave)
+    public function reseteada($clave)
     {
-        /*$clave = base64_decode($clave);
-        $sql = 'SELECT id FROM usuarios WHERE clave=?';
-        $usuario = self::first($sql, [$clave]);
-        if ( ! $usuario) {
-            Session::setArray('mensajes', _('Credenciales no aceptados.'));
-            return false;
+        $clave = base64_decode($clave);
+        if ( ! $clave) {
+            return;
         }
 
-        $sql = 'UPDATE usuarios SET validado=1 WHERE clave=?';
-        self::query($sql, [$clave]);
+        $sql = "UPDATE usuarios SET clave=? WHERE clave=?";
+        parent::query($sql, [null, $clave]);
 
-        Session::setArray('mensajes', _('Ahora pruebe a entrar con otra clave.'));*/
+        Session::setArray('mensajes', _('Clave reseteada, entre con una nueva.'));
+    }
+
+    #
+    public function resetear($datos)
+    {
+        $datos['correo'] = self::validate('correo', $datos['correo']);
+        if ( ! $datos['correo']) {
+            return Session::setArray('mensajes', t('¿No se deja algo?'));
+        }
+
+        $sql = 'SELECT * FROM usuarios WHERE correo=?';
+        $usuario = parent::first($sql, [$datos['correo']]);
+        if ( ! $usuario) {
+            return Session::setArray('mensajes', _('Lo siento, prueba a Crear la cuenta.'));
+        }
+
+        $protocol = ($_SERVER["SERVER_PROTOCOL"]=='HTTP/1.1')
+            ? 'http://' : 'https://';
+        $url = $protocol . $_SERVER['HTTP_HOST'] . "/usuarios/reseteada/" . base64_encode($usuario->clave);
+
+        $body[] = _('Ha solicitado el reseteo de su clave de acceso. Siga instrucciones.');
+        
+        $body[] = _('Pulse el siguiente enlace y su contraseña quedará en blanco. Después deberá introducir una nueva con un mínimo de 12 caracteres.');
+
+        $body[] = $url;
+
+        $body[] = _('Nos vemos.');
+
+        $to = $datos['correo'];
+        $subject = _('Resetear la clave');
+        $body = implode("\n\n", $body);
+
+        mail($to, $subject, $body);
+
+        Session::setArray('mensajes', _('Acuda a su cliente de correo.'));
     }
 
     #
     public function uno($aid=0)
     {
-        $aid = empty($aid) ? Session::get('aid') : $aid;
+        $aid = $aid ?: Session::get('aid');
         $sql = 'SELECT * FROM usuarios WHERE aid=?';
-        return self::first($sql, [$aid]);
+        return parent::first($sql, [$aid]) ?: parent::cols();
     }
 
     #
@@ -133,14 +172,14 @@ class Usuarios extends LiteRecord
     {
         $clave = base64_decode($clave);
         $sql = 'SELECT id FROM usuarios WHERE clave=?';
-        $usuario = self::first($sql, [$clave]);
+        $usuario = parent::first($sql, [$clave]);
         if ( ! $usuario) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
             return false;
         }
 
         $sql = 'UPDATE usuarios SET validado=1 WHERE clave=?';
-        self::query($sql, [$clave]);
+        parent::query($sql, [$clave]);
 
         Session::setArray('mensajes', _('Correo validado. Ahora puede entrar.'));
     }

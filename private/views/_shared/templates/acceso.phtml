@@ -4,14 +4,15 @@
         <meta charset=<?=APP_CHARSET?>>
         <title><?=_('Control de acceso')?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/admin.min.css">
+        <link rel="stylesheet" href="/css/default.min.css">
     </head>
     <body>
         <?php View::partial('mensajes'); ?>
-        <main>
+        <main class="container">
             <article class="formulario-de-acceso">
+                <br>
                 <section>
-                    <figure class="apartados" data-active data-tabs=".formulario-de-acceso form">
+                    <figure class="tabs" data-active data-tabs=".formulario-de-acceso form">
                         <a class="active" href="#entrar"><?=_('Entrar')?></a>
                         <a href="#registrar"><?=_('Registrar')?></a>
                         <a href="#resetear"><?=_('Resetear')?></a>
@@ -22,7 +23,7 @@
                         <input type="email" name="correo" placeholder="Correo" value="<?=h(Input::post('correo'))?>" required>
                         <button type="button" class="transparente" data-show_pass=".entrar [name='clave']"><img alt="<?=_('Mostrar contraseña')?>" src="/img/icons/eye-s.svg"> <small><?=_('Mostrar contraseña')?></small></button>
                         <input type="password" name="clave" placeholder="Clave de 12 o más caracteres"  required>
-                        <button type="submit" class="contrast" name="usuario" value="entrar"><?=_('Entrar')?></button>
+                        <button type="submit" name="usuario" value="entrar"><?=_('Entrar')?></button>
                     </form>
 
                     <form class="registrar" method="post" style="display:none">
@@ -36,23 +37,24 @@
                                 <a data-ajax=".ajax.show" href="/pages/politicas"><?=_('Acepto las políticas sin reserva.')?></a>
                             </label>
                         </fieldset>
-                        <button type="submit" class="contrast" name="usuario" value="registrar"><?=_('Registrar')?></button>
+                        <button type="submit" name="usuario" value="registrar"><?=_('Registrar')?></button>
                     </form>
 
                     <form class="resetear" method="post" style="display:none">
                         <input type="email" name="correo" placeholder="Correo" value="<?=h(Input::post('correo'))?>" required>
-                        <button type="submit" class="contrast" name="usuario" value="resetear"><?=_('Resetear')?></button>
+                        <button type="submit" name="usuario" value="resetear"><?=_('Resetear')?></button>
                     </form>
 
                     <form class="borrarse" method="post" style="display:none">
                         <input type="email" name="correo" placeholder="Correo" value="<?=h(Input::post('correo'))?>" required>
                         <button type="button" class="transparente" data-show_pass=".borrarse [name='clave']"><img alt="<?=_('Mostrar contraseña')?>" src="/img/icons/eye-s.svg"> <small><?=_('Mostrar contraseña')?></small></button>
                         <input type="password" name="clave" placeholder="Clave"  required>
-                        <button type="submit" class="contrast" name="usuario" value="borrarse"><?=_('Borrarse')?></button>
+                        <button type="submit" name="usuario" value="borrarse"><?=_('Borrarse')?></button>
                     </form>
                 </section>
+                <br>
             </article>
         </main>
-        <script src="/javascript/admin.min.js"></script>
+        <script src="/javascript/default.min.js"></script>
     </body>
 </html>

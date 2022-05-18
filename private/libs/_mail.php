@@ -14,7 +14,5 @@ class _mail
 		$headers[] = 'Reply-To: webmaster@multisitio.es';
 
 		mail($to, $subject, $body, implode("\r\n", $headers));
-
-        _var::die([$to, $subject, $body, implode("\r\n", $headers)]);
     }
 }
