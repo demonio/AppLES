@@ -98,7 +98,7 @@ class Eventos_usuarios extends LiteRecord
 
 		$mensaje[] = _('Y termina a las ') . date('H:i d-m-Y', strtotime($evento->termina));
 
-		$mensaje[] = _('Mantengase en contacto con el organizador de este evento escribiéndole a ') . $organizador->correo;
+		$mensaje[] = _('Manténgase en contacto con el organizador de este evento escribiéndole a ') . $organizador->correo;
 
 		$mensaje[] = _('Si no pudiera asistir a tiempo al evento, puede desapuntarse visitando el enlace ') . "https://les.multisitio.es/eventos/ver/$evento->aid";
 
@@ -152,7 +152,7 @@ class Eventos_usuarios extends LiteRecord
 
 		$mensaje[] = _('Y termina a las ') . date('H:i d-m-Y', strtotime($evento->termina));
 
-		$mensaje[] = _('Mantengase en contacto con el organizador de este evento escribiéndole a ') . $organizador->correo;
+		$mensaje[] = _('Manténgase en contacto con el organizador de este evento escribiéndole a ') . $organizador->correo;
 
 		$mensaje[] = _('Si no pudiera asistir a tiempo al evento, puede desapuntarse visitando el enlace ') . "https://les.multisitio.es/eventos/ver/$evento->aid";
 

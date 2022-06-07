@@ -18,7 +18,24 @@ class Eventos extends LiteRecord
 		$vals[] = $aid;
 
 		$sql = 'UPDATE eventos SET aceptado=?, aceptado_por=? WHERE aid=?';
-		return parent::query($sql, $vals);
+		parent::query($sql, $vals);
+
+		$evento = self::uno($aid);
+		$organizador = (new Usuarios)->uno($evento->organizador);
+
+		$mensaje[] = _('Se ha aceptado el evento ') . $evento->nombre;
+
+		$mensaje[] = _('El evento comienza a las ') . date('H:i d-m-Y', strtotime($evento->comienza));
+
+		$mensaje[] = _('Y termina a las ') . date('H:i d-m-Y', strtotime($evento->termina));
+
+		$mensaje[] = _('Manténgase atento, los participantes podrían escribirle si tienen dudas.');
+
+		$mensaje[] = _('Si no pudiera realizar el evento puede cancelarlo visitando el enlace ') . "https://les.multisitio.es/eventos/ver/$evento->aid";
+
+		$mensaje = implode("\n\n", $mensaje);
+
+        _mail::send($organizador->correo, _('Aceptado el evento ') . $evento->nombre, $mensaje);
     }
 
     #
@@ -32,7 +49,7 @@ class Eventos extends LiteRecord
     public function borrarEvento($data)
     {
 		$sql = 'DELETE FROM eventos WHERE organizador=? AND aid=?';
-		return parent::query($sql, [Session::get('aid'), $data['aid']]);
+		parent::query($sql, [Session::get('aid'), $data['aid']]);
 	}
 
     #
