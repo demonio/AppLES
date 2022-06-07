@@ -17,12 +17,12 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 ## Hecho sin validar
 - Apuntarse como reserva a un evento lleno.
 - Correo al aceptar evento.
+- Buscador básico de eventos.
 
 ## Duda
 - Correo al desapuntarse.
 
 ## Por hacer
-- Buscador de eventos.
 - Paginación de eventos.
 - Redirigir a la pestaña del formulario que produjo una excepción.
 - Colocar el ojo de mostrar contraseña a la izquierda de texto.

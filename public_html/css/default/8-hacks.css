@@ -1,6 +1,7 @@
+/* Los botones en grid crecen con esto.
 button {
     margin-bottom: 0;
-}
+}*/
 
 .grid {
     grid-template-columns: repeat(auto-fit, minmax(0%, 1fr));
