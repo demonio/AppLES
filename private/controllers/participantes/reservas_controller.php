@@ -8,7 +8,7 @@ class ReservasController extends RegistradosController
     {
         $this->eventos = (new Eventos_usuarios)->misReservas();
         $this->apuntados = (new Eventos_usuarios)->apuntados($this->eventos);
-        #_var::die($this->apuntados);
+        $this->reservas = (new Eventos_usuarios)->reservas($this->eventos);
     }
 
     #

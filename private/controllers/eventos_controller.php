@@ -15,5 +15,7 @@ class EventosController extends AppController
     {
         $this->evento = (new Eventos)->uno($aid);
         $this->apuntado = (new Eventos_usuarios)->apuntado($aid);
+        $this->apuntados = (new Eventos_usuarios)->apuntados([$this->evento]);
+        $this->reservas = (new Eventos_usuarios)->reservas([$this->evento]);
     }
 }

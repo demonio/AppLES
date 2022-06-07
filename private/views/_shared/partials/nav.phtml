@@ -29,7 +29,7 @@ $controllers = [
 
 		<li><a role="button" class="outline" href="<?=$module?>/<?=$controller_name?>"><?=$controllers[$controller_name]?></a></li>
 	</ul>
-	<?php if ($usuario->id): ?>
+	<?php if (Session::get('idu')): ?>
 		<ul>
 			<li>
 				<?=_('Bienvenido')?> <span class="nowrap"><?=$usuario->apodo?></span>

@@ -1,6 +1,7 @@
 <?php
 $eventos = View::getVar('eventos');
 $apuntados = View::getVar('apuntados');
+$reservas = View::getVar('reservas');
 ?>
 <div id="grid" class="cartelera" data-columns>
     <?php foreach ($eventos as $eve):
@@ -14,6 +15,7 @@ $apuntados = View::getVar('apuntados');
         $h = $intervalo->format('%h');
         $i = $intervalo->format('%i');
         $n_apuntados = empty($apuntados[$eve->aid]) ? 0 : count($apuntados[$eve->aid]);
+        $n_reservas = empty($reservas[$eve->aid]) ? 0 : count($reservas[$eve->aid]);
         ?>
         <article>
             <a href="/eventos/ver/<?=$eve->aid?>">
@@ -29,15 +31,20 @@ $apuntados = View::getVar('apuntados');
                 <div class="duracion">
                     <p><?=($h)?"$h".'h':''?> <?=($i)?"$i'":''?></p>
                 </div>
-                <?php if ($eve->participantes_max === $n_apuntados): ?>
+                <?php if ($eve->participantes_max == $n_apuntados): ?>
                     <div class="llena" style="transform:rotate(<?=rand(0,60)-30?>deg)">
-                        <p><?=_('Mesa llena')?></p>
+                        <p>
+                            <?=_('Completa')?>
+                            <?="$n_apuntados/$eve->participantes_max"?><br>
+                            <small><small><small><?=_('Reservas')?>: <?=$n_reservas?></small></small></small>
+                        </p>
                     </div>
                 <?php else: ?>
                     <div class="libre" style="transform:rotate(<?=rand(0,60)-30?>deg)">
                         <p>
                             <?=_('Libre')?>
-                            <?="$n_apuntados/$eve->participantes_max"?>
+                            <?="$n_apuntados/$eve->participantes_max"?><br>
+                            <small><small><small><?=_('Reservas')?>: <?=$n_reservas?></small></small></small>
                         </p>
                     </div>
                 <?php endif; ?>

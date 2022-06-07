@@ -18,6 +18,8 @@ class EventosController extends RegistradosController
     public function index()
     {
         $this->eventos = (new Eventos)->misEventos();
+        $this->apuntados = (new Eventos_usuarios)->apuntados($this->eventos);
+        $this->reservas = (new Eventos_usuarios)->reservas($this->eventos);
     }
 
     #

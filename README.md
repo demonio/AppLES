@@ -1,7 +1,7 @@
 # AppLES
 Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividades.
 
-## Hecho
+## Hecho y probado
 - App subida a multisitio para su testeo en remoto.
 - Formulario de acceso.
 - Sección para que los organizadores puedan gestionar eventos.
@@ -14,8 +14,10 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Menú lateral de enlaces.
 - Botones en vez de enlaces para favorecer el principio "mobile first".
 
-## Por hacer
+## Hecho sin probar
 - Apuntarse como reserva a un evento lleno.
+
+## Por hacer
 - Correo al desapuntarse.
 - Correo al aceptar evento.
 - Buscador de eventos.
@@ -32,3 +34,4 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Al modificar un evento, el moderador debe volver a aceptar el evento.
 - Probar inscribir menores.
 - Poner turno mañana y tarde en el formulario del evento.
+- Ver si la navegación se puede mantener para volver a atrás.

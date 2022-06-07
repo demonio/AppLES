@@ -19,19 +19,23 @@ $tipos = [
     <?php endif; ?>
 
     <section>
+        <br>
+        <?=nl2br(h($evento->descripcion))?><br>
         <?=Html::tags('/partidas/etiqueta/', $evento->etiquetas); ?><br>
         <br>
-        <p><?=nl2br(h($evento->descripcion))?></p>
-
         <ul>
             <li><b><?=_('Evento')?>:</b> <?=$tipos[$evento->tipo]?></li>
             <li><b><?=_('Sistema')?>:</b> <?=$evento->sistema?></li>
             <li><b><?=_('Organizador')?>:</b> <?=$evento->apodo?></li>
+            <li><b><?=_('Participantes mínimo')?>:</b> <?=$evento->participantes_min?></li> 
+            <li><b><?=_('Participantes máximo')?>:</b> <?=$evento->participantes_max?></li> 
             <li>
-                <b><?=_('Participantes')?>:</b>
-                <?=$evento->participantes_min?>
-                <?=empty($evento->participantes_max)
-                    ?'':"- $evento->participantes_max"?>
+                <b><?=_('Apuntados')?>:</b>
+                <?=empty($apuntados[$evento->aid])?0:count($apuntados[$evento->aid]);?>
+            </li> 
+            <li>
+                <b><?=_('Reservas')?>:</b>
+                <?=empty($reservas[$evento->aid])?0:count($reservas[$evento->aid]);?>
             </li> 
             <li><b><?=_('Comienza')?>:</b> <?=date('H:i d-m-Y', strtotime($evento->comienza))?></li>
             <li><b><?=_('Termina')?>:</b> <?=date('H:i d-m-Y', strtotime($evento->termina))?></li>
