@@ -1,0 +1,16 @@
+.paginador {
+    clear: both;
+    margin: 0 auto 1rem;
+    text-align: center;
+}
+
+.paginador form {
+    display: inline-block;
+    margin: 0;
+}
+
+#important .paginador form input {
+    margin: 0 0 5px;
+    text-align: center;
+    width: 75px;
+}

@@ -8,22 +8,30 @@ class Eventos extends LiteRecord
     {
 		$sql = 'SELECT * FROM eventos WHERE aceptado IS NOT NULL';
 
+		$criterios = $_GET['criterios'] = preg_replace('/[^a-záéíóúñ0-9\-: ]/i', '_', $_GET['criterios']);
+		if ($criterios) {
+			$sql .= ' AND (nombre LIKE ? OR descripcion LIKE ? OR sistema LIKE ? OR apodo LIKE ? OR etiquetas LIKE ? OR comienza LIKE ? OR termina LIKE ?) ORDER BY comienza DESC';
+			$vals[] = "%$criterios%";
+			$vals[] = "%$criterios%";
+			$vals[] = "%$criterios%";
+			$vals[] = "%$criterios%";
+			$vals[] = "%$criterios%";
+			$vals[] = "%$criterios%";
+			$vals[] = "%$criterios%";
+			$filas_sin_paginar = $_GET['filas_sin_paginar'] = parent::count($sql, $vals);
+		}
+		else {
+			$filas_sin_paginar = $_GET['filas_sin_paginar'] = parent::count($sql);
+		}
+
+		$por_pag = $_GET['filas_por_pagina'] = 2;
+		$pag = $_GET['pag'] = empty($_GET['pag']) ? 1 : ((int)$_GET['pag'] ?: 1);
+		$paginas = $_GET['paginas'] = ceil($filas_sin_paginar/$por_pag);
+		$sql .= ' LIMIT ' . ($pag-1)*$por_pag . ',' . $por_pag;
+
 		if (empty($_GET['criterios'])) {
 			return parent::all($sql);
 		}
-
-		$criterios = $_GET['criterios'] = preg_replace('/[^a-záéíóúñ0-9-: ]/i', '_', $_GET['criterios']);
-
-		$sql .= ' AND (nombre LIKE ? OR descripcion LIKE ? OR sistema LIKE ? OR apodo LIKE ? OR etiquetas LIKE ? OR comienza LIKE ? OR termina LIKE ?)';
-
-		$vals[] = "%$criterios%";
-		$vals[] = "%$criterios%";
-		$vals[] = "%$criterios%";
-		$vals[] = "%$criterios%";
-		$vals[] = "%$criterios%";
-		$vals[] = "%$criterios%";
-		$vals[] = "%$criterios%";
-
 		return parent::all($sql, $vals);
 	}
 

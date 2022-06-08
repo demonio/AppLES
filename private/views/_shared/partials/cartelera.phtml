@@ -8,6 +8,8 @@ $reservas = View::getVar('reservas');
     <button type="submit" class="s3"><?=_('Filtrar')?></button>
 </form>
 
+<?php View::partial('paginador'); ?>
+
 <div id="grid" class="cartelera" data-columns>
     <?php foreach ($eventos as $eve):
         $imagen = explode(', ', $eve->imagenes)[0];
@@ -70,3 +72,5 @@ $reservas = View::getVar('reservas');
         </article>
     <?php endforeach; ?>
 </div>
+
+<?php View::partial('paginador'); ?>

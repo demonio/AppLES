@@ -36,12 +36,11 @@ class LiteRecord extends ORM
 		return (object)$a;
 	}
 
-	public static function count(string $where='', array $values=[])
+	public static function count(string $sql='', array $values=[]) : int
     {
         $source = static::getSource();
-        $sql = QueryGenerator::count($source, $where);
-        $sth = static::query($sql, $values);
-        return $sth->fetch()->count;
+		$query = $source::query("SELECT COUNT(*) AS count FROM ($sql) AS t", $values)->fetch();
+        return (int) $query->count;
 	}
 
 	public static function getValue(string $col='')

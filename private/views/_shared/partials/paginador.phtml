@@ -1,0 +1,14 @@
+
+<div class="paginador">
+    <a role="button" class="outline" <?php if ($_GET['pag'] > 1): ?> href="?criterios=<?=$_GET['criterios']?>&pag=1" <?php else: ?> disabled <?php endif; ?>><?=_('Primera')?></a>
+
+    <a role="button" class="outline" <?php if ($_GET['pag'] > 1): ?> href="?criterios=<?=$_GET['criterios']?>&pag=<?=$_GET['pag']-1?>" <?php else: ?> disabled <?php endif; ?>><?=_('Anterior')?></a>
+
+    <form action="?criterios=<?=$_GET['criterios']?>">
+        <input type="text" name="pag" value="<?=h($_GET['pag'])?>">
+    </form>
+
+    <a role="button" class="outline" <?php if ($_GET['paginas'] > $_GET['pag']): ?> href="?criterios=<?=$_GET['criterios']?>&pag=<?=$_GET['pag']+1?>" <?php else: ?> disabled <?php endif; ?>><?=_('Siguiente')?></a>
+
+    <a role="button" class="outline" <?php if ($_GET['paginas'] > $_GET['pag']): ?> href="?criterios=<?=$_GET['criterios']?>&pag=<?=$_GET['paginas']?>" <?php else: ?> disabled <?php endif; ?>><?=_('Última')?> (<?=$_GET['paginas']?>)</a>
+</div>
