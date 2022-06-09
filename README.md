@@ -19,12 +19,12 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Correo al aceptar evento.
 - Buscador básico de eventos.
 - Paginación de eventos.
+- Redirigir a la pestaña del formulario en la que se estaba.
 
 ## Duda
 - Correo al desapuntarse.
 
 ## Por hacer
-- Redirigir a la pestaña del formulario que produjo una excepción.
 - Colocar el ojo de mostrar contraseña a la izquierda de texto.
 - Avisar del que los correos pueden llegar a spam.
 - Revisar línea 45 al borrarse.
