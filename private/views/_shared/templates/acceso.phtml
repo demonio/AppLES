@@ -28,6 +28,7 @@
 
                     <form class="registrar" method="post" style="display:none">
                         <input type="apodo" name="apodo" placeholder="Apodo de 3 o más caracteres" value="<?=h(Input::post('apodo'))?>" required>
+
                         <input type="email" name="correo" placeholder="Correo" value="<?=h(Input::post('correo'))?>" required>
 
                         <input type="password" name="clave" placeholder="Clave"  required>
@@ -37,6 +38,8 @@
                                 <a data-ajax=".ajax.show" href="/pages/politicas"><?=_('Acepto las políticas sin reserva.')?></a>
                             </label>
                         </fieldset>
+
+                        <small class="red"><?=_('Enviaremos un correo para confirmar su cuenta. Revise la bandeja de SPAM.')?></small>
                         <button type="submit" name="usuario" value="registrar"><?=_('Registrar')?></button>
                     </form>
 

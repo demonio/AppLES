@@ -107,7 +107,7 @@ class Usuarios extends LiteRecord
 
         _mail::send($datos['correo'], _('Confirme su cuenta en su correo electrónico'), $mensaje);
 
-        Session::setArray('mensajes', _('Acuda a su cliente de correo.'));
+        Session::setArray('mensajes', _('Acuda a su correo, bandeja de entrada o SPAM.'));
     }
 
     #

@@ -20,13 +20,13 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Buscador básico de eventos.
 - Paginación de eventos.
 - Redirigir a la pestaña del formulario en la que se estaba.
+- Colocar el ojo de mostrar contraseña a la izquierda de texto.
+- Avisar del que los correos pueden llegar a spam.
 
 ## Duda
 - Correo al desapuntarse.
 
 ## Por hacer
-- Colocar el ojo de mostrar contraseña a la izquierda de texto.
-- Avisar del que los correos pueden llegar a spam.
 - Revisar línea 45 al borrarse.
 - Quitar el límite de ancho de la cartelera ya que las etiquetas se solapan.
 - Listar eventos al pinchar una etiqueta.
