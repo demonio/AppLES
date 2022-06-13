@@ -21,7 +21,7 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Paginación de eventos.
 - Redirigir a la pestaña del formulario en la que se estaba.
 - Colocar el ojo de mostrar contraseña a la izquierda de texto.
-- Avisar del que los correos pueden llegar a spam.
+- Avisar de que los correos pueden llegar a spam.
 
 ## Duda
 - Correo al desapuntarse.

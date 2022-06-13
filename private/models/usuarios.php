@@ -35,25 +35,20 @@ class Usuarios extends LiteRecord
     #
     public function borrarse($datos)
     {  
-        $sql = 'SELECT aid, clave FROM usuarios WHERE correo=? OR correo=""';
+        $sql = 'SELECT correo, clave FROM usuarios WHERE correo=?';
         $usuario = parent::first($sql, [$datos['correo']]);
-        if ( ! $usuario) {
-            Session::setArray('mensajes', _('Credenciales no aceptados.'));
-            return false;
-        }
-
-        if ($usuario->correo && ! password_verify($datos['clave'], $usuario->clave)) {
+        if (empty($usuario->correo) ||
+        ! password_verify($datos['clave'], $usuario->clave)) {
             Session::setArray('mensajes', _('Credenciales no aceptados.'));
             return false;
         }
 
         $sql = 'DELETE FROM usuarios WHERE correo=?';
-
         parent::query($sql, [$datos['correo']]);
 
         Session::delete('aid');
 
-        Session::setArray('mensajes', _('Se ha eliminado el usuario.'));
+        Session::setArray('mensajes', _('Usuario eliminado.'));
     }
 
     #
@@ -103,7 +98,7 @@ class Usuarios extends LiteRecord
 
         $mensaje = _("Pulse en el siguiente enlace para confirmar su cuenta en la aplicación:\n\n");
 
-        $mensaje .= $_SERVER['HTTP_HOST'] . '/usuarios/validar/' . base64_encode($datos['clave']);
+        $mensaje .= 'https://' . $_SERVER['HTTP_HOST'] . '/usuarios/validar/' . base64_encode($datos['clave']);
 
         _mail::send($datos['correo'], _('Confirme su cuenta en su correo electrónico'), $mensaje);
 
