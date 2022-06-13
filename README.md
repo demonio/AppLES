@@ -24,12 +24,12 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Avisar de que los correos pueden llegar a spam.
 - Fallo de error en pantallla al borrerse.
 - Quitar el límite de ancho de pantalla.
+- Listar eventos al pinchar una etiqueta.
 
 ## Duda
 - Correo al desapuntarse.
 
 ## Por hacer
-- Listar eventos al pinchar una etiqueta.
 - Poner aid y código de barras junto al apodo del usuario. 
 - Ocultar en el menú las secciones de los otros roles.
 - Comprobar que la fecha fin es posterior a la de inicio.
