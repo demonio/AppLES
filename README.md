@@ -22,13 +22,13 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Redirigir a la pestaña del formulario en la que se estaba.
 - Colocar el ojo de mostrar contraseña a la izquierda de texto.
 - Avisar de que los correos pueden llegar a spam.
-- Fallo de error en pantallla al borrerse
+- Fallo de error en pantallla al borrerse.
+- Quitar el límite de ancho de pantalla.
 
 ## Duda
 - Correo al desapuntarse.
 
 ## Por hacer
-- Quitar el límite de ancho de la cartelera ya que las etiquetas se solapan.
 - Listar eventos al pinchar una etiqueta.
 - Poner aid y código de barras junto al apodo del usuario. 
 - Ocultar en el menú las secciones de los otros roles.
