@@ -4,11 +4,15 @@
 class Eventos extends LiteRecord
 {
     #
-    public function aceptados()
+    public function aceptados($criterios='')
     {
 		$sql = 'SELECT * FROM eventos WHERE aceptado IS NOT NULL';
 
-		$criterios = $_GET['criterios'] = preg_replace('/[^a-záéíóúñ0-9\-: ]/i', '_', $_GET['criterios']);
+		if ($criterios) {
+			$_GET['criterios'] = $criterios;
+		}
+
+		$criterios = $_GET['criterios'] = preg_replace('/[^a-záéíóúñ0-9\-:\[\] ]/i', '_', $_GET['criterios']);
 		if ($criterios) {
 			$sql .= ' AND (nombre LIKE ? OR descripcion LIKE ? OR sistema LIKE ? OR apodo LIKE ? OR etiquetas LIKE ? OR comienza LIKE ? OR termina LIKE ?) ORDER BY comienza DESC';
 			$vals[] = "%$criterios%";
@@ -32,6 +36,7 @@ class Eventos extends LiteRecord
 		if (empty($_GET['criterios'])) {
 			return parent::all($sql);
 		}
+		#_var::die([$sql, $vals]);
 		return parent::all($sql, $vals);
 	}
 

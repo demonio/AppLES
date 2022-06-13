@@ -21,7 +21,7 @@ $tipos = [
     <section>
         <br>
         <?=nl2br(h($evento->descripcion))?><br>
-        <?=Html::tags('/partidas/etiqueta/', $evento->etiquetas); ?><br>
+        <?=Html::tags('/eventos', $evento->etiquetas); ?><br>
         <br>
         <ul>
             <li><b><?=_('Evento')?>:</b> <?=$tipos[$evento->tipo]?></li>
