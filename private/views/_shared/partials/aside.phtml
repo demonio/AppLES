@@ -38,6 +38,11 @@ $usuario = View::getVar('usuario');
 
 	<hr>
 	<div class="info">
+		<b><?=_('Impulsado por')?>:</b>
+		<a role="button" class="outline left" href="https://www.ludoergosum.org" target="_blank"><?=_('Ludo Ergo Sum')?></a>
+		<a role="button" class="outline left" href="https://kumbiaphp.com" target="_blank"><?=_('KumbiaPHP')?></a>
+		<a role="button" class="outline left" href="https://roleplus.app" target="_blank"><?=_('ROLEplus')?></a>
+		<br>
 		<b><?=_('Memoria usada')?>:</b> <?=number_format(memory_get_usage()/1048576, 2, '.', '') . ' MB'?><br>
 		<b><?=_('Tiempo de carga')?>:</b> <?=number_format(microtime(1)-$_SERVER['REQUEST_TIME_FLOAT'], 3, '.', '') . '"'?>
 		<button type="button" class="outline left IP" data-toggle=".IP">
@@ -46,10 +51,6 @@ $usuario = View::getVar('usuario');
 		<span class="IP" style="display:none">
 			<br><b><?=_('Tu')?> IP:</b> <?=$_SERVER['REMOTE_ADDR']?><br>
 		</span>
-		<b><?=_('Impulsado por')?>:</b>
-		<a role="button" class="outline left" href="https://www.ludoergosum.org" target="_blank"><?=_('Ludo Ergo Sum')?></a>
-		<a role="button" class="outline left" href="https://kumbiaphp.com" target="_blank"><?=_('KumbiaPHP')?></a>
-		<a role="button" class="outline left" href="https://roleplus.app" target="_blank"><?=_('ROLEplus')?></a>
 	</div>
 </aside>
 <div class="overlay aside" data-hide="aside, .overlay" style="display:none"></div>
