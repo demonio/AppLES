@@ -32,4 +32,10 @@ class UsuariosController extends AppController
         (new Usuarios)->validar($clave);
         Redirect::to('/usuarios/entrar');
     }
+    
+    #
+    public function ver($aid)
+    {
+        $this->usuario = (new Usuarios)->uno($aid);
+    }
 }

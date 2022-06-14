@@ -25,12 +25,13 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Fallo de error en pantallla al borrerse.
 - Quitar el límite de ancho de pantalla.
 - Listar eventos al pinchar una etiqueta.
+- Perfil de usuario público con cógigo QR.
 
 ## Duda
-- Correo al desapuntarse.
+- Correo al desapuntarse. ¿Para?
+- Poner un id correlativo visible. ¿Utilidad?
 
 ## Por hacer
-- Poner aid y código de barras junto al apodo del usuario. 
 - Ocultar en el menú las secciones de los otros roles.
 - Comprobar que la fecha fin es posterior a la de inicio.
 - Al modificar un evento, el moderador debe volver a aceptar el evento.

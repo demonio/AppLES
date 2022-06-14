@@ -1,0 +1,25 @@
+
+<article>
+    <header>
+        <h1><?=$usuario->apodo?></h1>
+        <br>
+    </header>
+
+    <section class="center">
+        <?php
+        include APP_PATH . 'libs/phpqrcode/qrlib.php'; 
+
+        $url = "https://{$_SERVER['HTTP_HOST']}/usuarios/ver/$usuario->aid";
+
+        $img = "img/users/$usuario->aid.png";
+
+        if ( ! file_exists($img)) {
+            QRcode::png($url, $img, QR_ECLEVEL_L, 10, 2);
+        }
+        ?>
+        <a href="<?=$url?>"><img src="/<?=$img?>"></a>
+    </section>
+
+    <footer class="grid">
+    </footer>
+</article>

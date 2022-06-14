@@ -16,6 +16,7 @@ $controllers = [
 	'index'=>_('Portada'),
 	'eventos'=>_('Eventos'),
 	'reservas'=>_('Reservas'),
+	'usuarios'=>_('Usuarios'),
 ];
 ?>
 
@@ -32,7 +33,7 @@ $controllers = [
 	<?php if (Session::get('aid')): ?>
 		<ul>
 			<li>
-				<?=_('Bienvenido')?> <span class="nowrap"><?=$usuario->apodo?></span>
+				<?=_('Bienvenido')?> <a href="/usuarios/ver/<?=$usuario->aid?>" class="nowrap"><?=$usuario->apodo?></a>
 				<br><b>ID:</b> <?=$usuario->id?>
 			</li>
 			<li><a role="button" class="outline" href="/usuarios/salir"><?=_('¿Salir?')?></a></li>
