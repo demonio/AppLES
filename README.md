@@ -26,13 +26,13 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Quitar el límite de ancho de pantalla.
 - Listar eventos al pinchar una etiqueta.
 - Perfil de usuario público con cógigo QR.
+- Ocultar en el menú las secciones de los otros roles.
 
 ## Duda
 - Correo al desapuntarse. ¿Para?
 - Poner un id correlativo visible. ¿Utilidad?
 
 ## Por hacer
-- Ocultar en el menú las secciones de los otros roles.
 - Comprobar que la fecha fin es posterior a la de inicio.
 - Al modificar un evento, el moderador debe volver a aceptar el evento.
 - Probar inscribir menores.
