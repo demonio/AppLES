@@ -128,7 +128,11 @@ class Eventos extends LiteRecord
 			? '' 
 			: '[' . implode('], [', $data['etiquetas']) . ']';
 		$vals[] = $data['comienza'] ?: null;
-		$vals[] = $data['termina'] ?: null;
+
+		$data['termina'] = $data['termina'] ?: null;
+        $vals[] = ($data['termina'] && $data['termina'] <= $data['comienza'])
+			? date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($data['comienza'])))
+			: $data['termina'];
 
 		if (empty($data['aid'])) {
 			$sql = 'INSERT INTO eventos SET aid=?, nombre=?, descripcion=?, imagenes=?, tipo=?, sistema=?, organizador=?, apodo=?, participantes_min=?, participantes_max=?, etiquetas=?, comienza=?, termina=?';

@@ -27,13 +27,13 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Listar eventos al pinchar una etiqueta.
 - Perfil de usuario público con cógigo QR.
 - Ocultar en el menú las secciones de los otros roles.
+- Si la fecha fin es posterior a la de inicio, fin = inicio +1h.
 
 ## Duda
 - Correo al desapuntarse. ¿Para?
 - Poner un id correlativo visible. ¿Utilidad?
 
 ## Por hacer
-- Comprobar que la fecha fin es posterior a la de inicio.
 - Al modificar un evento, el moderador debe volver a aceptar el evento.
 - Probar inscribir menores.
 - Poner turno mañana y tarde en el formulario del evento.
