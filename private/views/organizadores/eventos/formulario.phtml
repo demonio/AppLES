@@ -46,7 +46,7 @@
 
         <input name="apodo" placeholder="<?=_('Tu apodo en Discord')?>..." value="<?=h($evento->apodo)?>">
 
-        <textarea name="descripcion" placeholder="<?=_('Sinopsis, herramientas y otros detalles')?>..."><?=$evento->descripcion?></textarea>
+        <textarea name="descripcion" placeholder="<?=_('Sinopsis, herramientas y otros detalles')?>..."><?=h($evento->descripcion)?></textarea>
 
         <div class="grid">
             <label for="switch">
