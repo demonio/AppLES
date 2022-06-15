@@ -6,7 +6,7 @@
 	</header>
     <section>
         <div class="grid">
-            <input class="s8" name="nombre" placeholder="<?=_('Título')?>..." value="<?=$evento->nombre?>">
+            <input class="s8" name="nombre" placeholder="<?=_('Título')?>..." value="<?=h($evento->nombre)?>">
             <select class="s4" name="tipo">
                 <option <?=($evento->tipo==='charla')?'selected':''?>value="charla"><?=_('Charla')?></option>
                 <option <?=( ! $evento->tipo || $evento->tipo==='partida')?'selected':''?> value="partida"><?=_('Partida')?></option>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="grid baseline sistema">
-            <input name="sistema" placeholder="<?=_('Sistema')?>..." value="<?=$evento->sistema?>">
+            <input name="sistema" placeholder="<?=_('Sistema')?>..." value="<?=h($evento->sistema)?>">
             <label for="switch">
                 <?=_('Original')?>
                 <input type="checkbox" <?=empty($evento->sistema)?'':'checked'?> name="etiquetas[]" value="sistema_propio" role="switch">
@@ -44,7 +44,7 @@
             </label>
         </div>
 
-        <input name="apodo" placeholder="<?=_('Tu apodo en Discord')?>..." value="<?=$evento->apodo?>">
+        <input name="apodo" placeholder="<?=_('Tu apodo en Discord')?>..." value="<?=h($evento->apodo)?>">
 
         <textarea name="descripcion" placeholder="<?=_('Sinopsis, herramientas y otros detalles')?>..."><?=$evento->descripcion?></textarea>
 

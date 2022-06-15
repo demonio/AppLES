@@ -2,9 +2,10 @@
 $eventos = View::getVar('eventos');
 $apuntados = View::getVar('apuntados');
 $reservas = View::getVar('reservas');
+$_GET['criterios'] = $_GET['criterios'] ?? '';
 ?>
 <form action="" class="buscador grid">
-    <input type="text" class="s9" name="criterios" placeholder="<?=_('Buecar en el nombre, descripcion, sistema, apodo, etiquetas, comienza, termina...')?>" value="<?=$_GET['criterios']??''?>">
+    <input type="text" class="s9" name="criterios" placeholder="<?=_('Buecar en el nombre, descripcion, sistema, apodo, etiquetas, comienza, termina...')?>" value="<?=h($_GET['criterios'])??''?>">
     <button type="submit" class="s3"><?=_('Filtrar')?></button>
 </form>
 
