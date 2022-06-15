@@ -1,6 +1,14 @@
-
+<?php
+$_GET['criterios'] = $_GET['criterios'] ?? '';
+?>
 <div class="center">
     <a data-ajax=".ajax.show" href="/organizadores/eventos/formulario" role="button"><?=_('Crear evento')?></a>
 </div>
 <br>
+<form action="" class="buscador grid">
+    <input type="text" class="s9" name="criterios" placeholder="<?=_('Buecar en el nombre, descripcion, sistema, apodo, etiquetas, comienza, termina...')?>" value="<?=h($_GET['criterios'])??''?>">
+    <button type="submit" class="s3"><?=_('Filtrar')?></button>
+</form>
+<?php View::partial('paginador'); ?>
 <?php View::partial('cartelera'); ?>
+<?php View::partial('paginador'); ?>

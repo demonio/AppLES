@@ -2,15 +2,7 @@
 $eventos = View::getVar('eventos');
 $apuntados = View::getVar('apuntados');
 $reservas = View::getVar('reservas');
-$_GET['criterios'] = $_GET['criterios'] ?? '';
 ?>
-<form action="" class="buscador grid">
-    <input type="text" class="s9" name="criterios" placeholder="<?=_('Buecar en el nombre, descripcion, sistema, apodo, etiquetas, comienza, termina...')?>" value="<?=h($_GET['criterios'])??''?>">
-    <button type="submit" class="s3"><?=_('Filtrar')?></button>
-</form>
-
-<?php View::partial('paginador'); ?>
-
 <div id="grid" class="cartelera" data-columns>
     <?php foreach ($eventos as $eve):
         $imagen = explode(', ', $eve->imagenes)[0];
@@ -73,5 +65,3 @@ $_GET['criterios'] = $_GET['criterios'] ?? '';
         </article>
     <?php endforeach; ?>
 </div>
-
-<?php View::partial('paginador'); ?>
