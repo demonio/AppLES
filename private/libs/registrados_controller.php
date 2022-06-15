@@ -31,6 +31,9 @@ abstract class RegistradosController extends Controller
 
         # Sin login
         if ( ! Session::get('aid')) {
+            if (Input::isAjax()) {
+                return _url::to('/usuarios/entrar');
+            }
             View::template('acceso');
             return false;
         }
