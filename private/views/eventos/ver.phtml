@@ -41,6 +41,10 @@ $tipos = [
             <li><b><?=_('Termina')?>:</b> <?=date('H:i d-m-Y', strtotime($evento->termina))?></li>
             <li><b><?=_('Aceptada')?>:</b> <?=empty($evento->aceptado)?_('No'):_('Sí')?></li>
         </ul>
+
+        <?php if ($evento->aceptado && $evento->organizador === $usuario->aid): ?>
+            <small class="red"><?=_('Editar un evento aceptado lo desactiva hasta que lo revise un moderador.')?></small>
+        <?php endif; ?>
     </section>
 
     <footer class="grid">

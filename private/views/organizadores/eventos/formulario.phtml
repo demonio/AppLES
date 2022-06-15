@@ -83,8 +83,11 @@
     <footer class="grid">
         <?php if ($evento->aid): ?>
             <button type="submit" class="outline" name="action" value="borrar"><?=_('Borrar')?></button>
+
             <button type="submit"" class="outline" name="action" value="crear"><?=_('Clonar')?></button>
+            
             <button type="submit" name="action" value="editar"><?=_('Editar')?></button>
+
             <input type="hidden" name="aid" value="<?=$evento->aid?>">
         <?php else: ?>
             <button type="submit" name="action" value="crear"><?=_('Crear')?></button>

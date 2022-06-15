@@ -127,6 +127,9 @@ class Eventos extends LiteRecord
 		$vals[] = empty($data['etiquetas'])
 			? '' 
 			: '[' . implode('], [', $data['etiquetas']) . ']';
+
+		$vals[] = null;
+		$vals[] = null;
 		$vals[] = $data['comienza'] ?: null;
 
 		$data['termina'] = $data['termina'] ?: null;
@@ -141,7 +144,7 @@ class Eventos extends LiteRecord
 		else {
 			$vals[] = $data['aid'];
 			$vals[] = Session::get('aid');
-			$sql = 'UPDATE eventos SET nombre=?, descripcion=?, imagenes=?, tipo=?, sistema=?, apodo=?, participantes_min=?, participantes_max=?, etiquetas=?, comienza=?, termina=? WHERE aid=? AND organizador=?';
+			$sql = 'UPDATE eventos SET nombre=?, descripcion=?, imagenes=?, tipo=?, sistema=?, apodo=?, participantes_min=?, participantes_max=?, etiquetas=?, aceptado=?, aceptado_por=?, comienza=?, termina=? WHERE aid=? AND organizador=?';
 			Session::setArray('mensajes', _('Evento editado.'));
 		}
 		parent::query($sql, $vals);
