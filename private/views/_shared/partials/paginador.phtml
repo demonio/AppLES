@@ -1,4 +1,6 @@
-
+<?php
+$_GET['paginas'] = $_GET['paginas'] ?? 1;
+?>
 <?php if ($_GET['paginas'] > 1): ?>
     <div class="paginador">
         <a role="button" class="outline" <?php if ($_GET['pag'] > 1): ?> href="?criterios=<?=$_GET['criterios']?>&pag=1" <?php else: ?> disabled <?php endif; ?>><?=_('Primera')?></a>
