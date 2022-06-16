@@ -1,0 +1,29 @@
+
+<h1 class="text-center"><?=_('Menores al cargo')?></h1>
+
+<section class="inscritos">
+    <?php include APP_PATH . 'views/participantes/menores/inscritos.phtml'; ?>
+</section>
+
+<?=Form::open('participantes/menores/inscribir', 'post', 'data-ajax=".inscritos"')?>
+    <header>
+        <h3><?=_('Inscribir menor')?></h3>
+    </header>
+    <br>
+    <section class="grid">
+        <label class="s8">
+            <?=_('Nombre')?>
+            <?=Form::text('nombre', 'required')?>
+        </label>
+        <label class="s4">
+            <?=_('Edad')?>
+            <?=Form::number('edad', 'min="0" max="17" required')?>
+        </label>
+    </section>
+    <footer class="grid">
+        <div class="s4">
+            <?=Form::submit('Añadir', 'name="action" value="inscribir_menor"')?>
+        </div>
+        <div class="s8"></div>
+    </footer>
+<?=Form::close()?>

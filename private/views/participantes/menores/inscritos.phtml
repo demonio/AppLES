@@ -1,0 +1,19 @@
+
+<table class="menores" role="grid">
+    <thead>
+        <tr>
+            <th scope="col"><?=_('Nombre')?></th>
+            <th scope="col"><?=_('Edad')?></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($inscritos as $ins): ?>
+            <tr>
+                <td><?=$ins->nombre?></td>
+                <td><?=$ins->edad?></td>
+                <td><a data-ajax=".inscritos" href="/participantes/menores/quitar/<?=$ins->aid?>"><img src="/img/icons/x.svg"></a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

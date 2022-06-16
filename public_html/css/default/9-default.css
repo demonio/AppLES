@@ -5,3 +5,19 @@ nav {
 .red {
     color: red;
 }
+
+table.menores th:nth-child(1),
+table.menores td:nth-child(1) {
+    width: 70%;
+}
+
+table.menores th:nth-child(2),
+table.menores td:nth-child(2) {
+    width: 15%;
+}
+
+table.menores th:nth-child(3),
+table.menores td:nth-child(3) {
+    text-align: right;
+    width: 15%;
+}

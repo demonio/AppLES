@@ -72,7 +72,7 @@
                 <input type="hidden" name="imagenes_guardadas[]" value="<?=$evento->imagenes?>">
             </div>
         <?php else: ?>
-            <label class="dropimage dropnocontent" style="background:url(/img/users/<?=$evento->imagenes?>) center no-repeat; background-size:cover">
+            <label class="dropimage dropnocontent" style="background:url(/img/users/<?=$evento->imagenes?>) text-center no-repeat; background-size:cover">
                 <input type="file" name="imagenes[]" multiple>
                 <button type="button" class="transparent tr-15" data-remove="parent"><img alt="<?=_('Quitar foto')?>" src="/img/icons/x-square.svg"></button>
                 <input type="hidden" name="imagenes_guardadas[]" value="<?=$evento->imagenes?>">
