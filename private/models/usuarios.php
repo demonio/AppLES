@@ -59,6 +59,19 @@ class Usuarios extends LiteRecord
     }
 
     #
+    public function grupo($aids)
+    {
+        foreach ($aids as $aid) {
+            $keys[] = 'aid=?';
+            $vals[] = $aid;
+        }
+
+        $sql = 'SELECT * FROM usuarios WHERE ' . implode(' OR ', $keys);
+
+        return parent::all($sql, $vals);
+    }
+
+    #
     public function registrar($datos)
     {  
         if (empty($datos['politicas'])) {

@@ -63,34 +63,59 @@ class Eventos_usuarios extends LiteRecord
     }
 
     #
-    public function apuntarse($eventos_aid)
+    public function apuntarse($datos)
     {
-		$apuntado = self::apuntado($eventos_aid);
-		if ($apuntado) {
-			return Session::setArray('mensajes', _('Ya estabas apuntado.'));
-		}
-		
-		$vals[] = $eventos_aid;
-		$vals[] = Session::get('aid');
-		$vals[] = date('Y-m-d H:i:s');
+		$eventos_aid = $datos['eventos_aid'];
 
         $evento = (new Eventos)->uno($eventos_aid);
         $apuntados = self::apuntados([$evento]);
         $n_apuntados = empty($apuntados[$eventos_aid])
             ? 0
             : count($apuntados[$eventos_aid]);
-		$vals[] = $reserva = ($n_apuntados < $evento->participantes_max) ? null : 1;
 
-		$sql = 'INSERT INTO eventos_usuarios SET eventos_aid=?, usuarios_aid=?, creado=?, reserva=?';
-		parent::query($sql, $vals);	
+		$participantes = (new Usuarios)->grupo($datos['participantes']);
+		$en_evento = $en_reserva = [];
+		foreach($participantes as $par) {
+
+			$nombre = $par->apodo ?: $par->nombre;
+
+			if ( ! empty($apuntados[$eventos_aid][$par->aid])) {
+				Session::setArray('mensajes', $nombre . _(' ya estaba apuntado.'));
+				continue;
+			}
+
+            $keys[] = '(?, ?, ?, ?)';
+
+			$vals[] = $eventos_aid;
+            $vals[] = $par->aid;
+			$vals[] = date('Y-m-d H:i:s');
+
+			if ($n_apuntados < $evento->participantes_max) {
+				$vals[] = null;
+				$en_evento[] = $nombre;
+			}
+			else {				
+				$vals[] = 1;
+				$en_reserva[] = $nombre;
+				Session::setArray('mensajes', $nombre . _(' apuntado como reserva.'));
+			}
+
+			++$n_apuntados;
+        }
+        if (empty($vals)) {
+            return;
+        }
+		$sql = 'INSERT INTO eventos_usuarios (eventos_aid, usuarios_aid, creado, reserva) VALUES ' . implode(', ', $keys);
+		#_var::die([$sql, $vals]);
+		parent::query($sql, $vals);
+		
+		if (empty($en_evento)) {
+			return;
+		}
 
 		$evento = (new Eventos)->uno($eventos_aid);
 		$organizador = (new Usuarios)->uno($evento->organizador);
 		$participante = (new Usuarios)->uno();
-
-		if ($reserva) {
-			return Session::setArray('mensajes', _('Apuntado como reserva.'));
-		}
 
 		$mensaje[] = _('Plaza confirmada al evento ') . $evento->nombre;
 
@@ -102,11 +127,15 @@ class Eventos_usuarios extends LiteRecord
 
 		$mensaje[] = _('Si no pudiera asistir a tiempo al evento, puede desapuntarse visitando el enlace ') . "https://les.multisitio.es/eventos/ver/$evento->aid";
 
+		$mensaje[] = _('Apuntados: ') . implode(', ', $en_evento);
+
+		$mensaje[] = _('En reserva: ') . implode(', ', $en_reserva);
+
 		$mensaje = implode("\n\n", $mensaje);
 
         _mail::send($participante->correo, _('Plaza confirmada a ') . $evento->nombre, $mensaje);
 
-		Session::setArray('mensajes', _('Apuntado, revise su correo.'));
+		Session::setArray('mensajes', _('Revise su correo.'));
 	}
 
     #

@@ -1,0 +1,31 @@
+
+<?=Form::open('participantes/reservas/confirmar', 'post', 'class="modal confirmar_reserva"')?>
+    <header>
+        <button type="button" class="transparent" data-hide=".modal, .overlay"><img alt="<?=_('Cerrar ventana')?>" src="/img/icons/x.svg"></button>
+        <h3><?=_('Confirmar reserva')?></h3>
+    </header>
+    <br>
+    <section>
+        <label>
+            <?php /*=Form::check('participantes[]', $usuario->aid,
+                empty($apuntados[$usuario->aid])?'checked':'')*/ ?>
+
+            <?=Form::check('participantes[]', $usuario->aid, null, true)?>
+
+            <?=$usuario->apodo?>
+        </label>
+        <?php foreach($menores as $men): ?>
+            <label>
+                <?=Form::check('participantes[]', $men->aid)?>
+                <?=$men->nombre?>
+            </label>
+        <?php endforeach; ?>
+    </section>
+    <br>
+    <footer>
+        <?=Form::submit('Confirmar', 'name="action" value="confirmar_reserva"')?>
+    </footer>
+    <?=Form::hidden('eventos_aid', null, $eventos_aid)?>
+<?=Form::close()?>
+
+<div class="overlay"></div>

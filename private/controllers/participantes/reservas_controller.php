@@ -14,7 +14,14 @@ class ReservasController extends RegistradosController
     #
     public function apuntarse($aid)
     {
-        (new Eventos_usuarios)->apuntarse($aid);
+        $this->menores = (new Usuarios_menores)->inscritos();
+        $this->eventos_aid = $aid;
+    }
+
+    #
+    public function confirmar()
+    {
+        (new Eventos_usuarios)->apuntarse(Input::post());
         return Redirect::to('/participantes/reservas');
     }
 
