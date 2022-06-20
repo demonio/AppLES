@@ -32,7 +32,8 @@ class Usuarios_menores extends LiteRecord
     {  
         $vals[] = Session::get('aid');
         $sql = 'SELECT * FROM usuarios WHERE usuarios_aid=? ORDER BY nombre';
-        return parent::all($sql, $vals);
+        $menores = parent::all($sql, $vals);
+        return parent::arrayBy($menores);
     }
 
     #

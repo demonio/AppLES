@@ -61,6 +61,9 @@ class Usuarios extends LiteRecord
     #
     public function grupo($aids)
     {
+        if ( ! $aids) {
+            return [];
+        }
         foreach ($aids as $aid) {
             $keys[] = 'aid=?';
             $vals[] = $aid;
@@ -68,7 +71,8 @@ class Usuarios extends LiteRecord
 
         $sql = 'SELECT * FROM usuarios WHERE ' . implode(' OR ', $keys);
 
-        return parent::all($sql, $vals);
+        $grupo = parent::all($sql, $vals);
+        return parent::arrayBy($grupo);
     }
 
     #

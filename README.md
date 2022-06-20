@@ -31,13 +31,13 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Al modificar un evento, el moderador debe volver a aceptar el evento.
 - Iñadir menores al perfil de usuario.
 - Inscribir menores a eventos.
+- Mostrar los eventos donde están apuntados los menores.
+- Desapuntar menores de eventos.
 
 ## Duda
 - Correo al desapuntarse. ¿Para?
 - Poner un id correlativo visible. ¿Utilidad?
 
 ## Por hacer
-- Mostrar los eventos donde están apuntados los menores.
-- Desapuntar menores de eventos.
 - Poner turno mañana y tarde en el formulario del evento.
 - Ver si la navegación se puede mantener para volver a atrás.

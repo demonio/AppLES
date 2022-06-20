@@ -16,7 +16,7 @@ use Kumbia\ActiveRecord\LiteRecord as ORM;
 
 class LiteRecord extends ORM
 {
-	public static function arrayBy($arr_old, $field='idu')
+	public static function arrayBy($arr_old, $field='aid')
 	{
         $arr_new = [];
         foreach ($arr_old as $obj) {
@@ -47,10 +47,10 @@ class LiteRecord extends ORM
     {
         $source = static::getSource();
 		if ($source == 'usuarios') {
-			$sql = "SELECT * FROM $source WHERE idu=?";
+			$sql = "SELECT * FROM $source WHERE aid=?";
 		}
 		else {
-			$sql = "SELECT * FROM $source WHERE usuarios_idu=?";
+			$sql = "SELECT * FROM $source WHERE usuarios_aid=?";
 		}
         $row = static::first($sql, [Session::get('rol')]);
 		return $row->$col;
@@ -60,10 +60,10 @@ class LiteRecord extends ORM
     {
         $source = static::getSource();
 		if ($source == 'usuarios') {
-			$sql = "UPDATE $source SET $col=? WHERE idu=?";
+			$sql = "UPDATE $source SET $col=? WHERE aid=?";
 		}
 		else {
-			$sql = "UPDATE $source SET $col=? WHERE usuarios_idu=?";
+			$sql = "UPDATE $source SET $col=? WHERE usuarios_aid=?";
 		}
         static::query($sql, [$val, Session::get('rol')]);
 	}

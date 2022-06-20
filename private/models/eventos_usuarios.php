@@ -6,8 +6,23 @@ class Eventos_usuarios extends LiteRecord
     #
     public function apuntado($eventos_aid)
     {	
-		$sql = 'SELECT * FROM eventos_usuarios WHERE eventos_aid=? AND usuarios_aid=?';
-		return parent::first($sql, [$eventos_aid, Session::get('aid')]);	
+		$vals[] = $eventos_aid;
+
+		$keys[] = '?';
+		$vals[] = Session::get('aid');
+
+		$menores = (new Usuarios_menores)->inscritos();
+		foreach ($menores as $men) {
+			$keys[] = '?';
+			$vals[] = $men->aid;
+		}
+		$keys = implode(', ', $keys);
+
+		$sql = "SELECT * FROM eventos_usuarios WHERE eventos_aid=? AND usuarios_aid IN ($keys)";
+
+		$participantes = parent::all($sql, $vals);
+
+		return parent::arrayBy($participantes, 'usuarios_aid');
 	}
 
     #
@@ -59,7 +74,7 @@ class Eventos_usuarios extends LiteRecord
         foreach ($rows as $row) {
             $reservas[$row->eventos_aid][$row->usuarios_aid] = $row;
         }
-        return $reservas;
+        return $reservas ?? [];
     }
 
     #
@@ -73,22 +88,36 @@ class Eventos_usuarios extends LiteRecord
             ? 0
             : count($apuntados[$eventos_aid]);
 
-		$participantes = (new Usuarios)->grupo($datos['participantes']);
+		$familia = (new Usuarios_menores)->inscritos();
+		$familia[Session::get('aid')] = (new Usuarios)->uno();
+
+		$participantes = empty($datos['participantes'])
+			? []
+			: (new Usuarios)->grupo($datos['participantes']);
+
 		$en_evento = $en_reserva = [];
-		foreach($participantes as $par) {
 
-			$nombre = $par->apodo ?: $par->nombre;
-
-			if ( ! empty($apuntados[$eventos_aid][$par->aid])) {
-				Session::setArray('mensajes', $nombre . _(' ya estaba apuntado.'));
+		foreach($familia as $fam) {
+			# Si estaba apuntado...
+			if ( ! empty($apuntados[$eventos_aid][$fam->aid])) {
+				# Si ahora no participa...
+				if (empty($participantes[$fam->aid])) {
+					$this->desapuntarse($eventos_aid, $fam->aid);
+				}
+				continue;
+			}
+			# Si no participa...
+			if (empty($participantes[$fam->aid])) {
 				continue;
 			}
 
             $keys[] = '(?, ?, ?, ?)';
 
 			$vals[] = $eventos_aid;
-            $vals[] = $par->aid;
+            $vals[] = $fam->aid;
 			$vals[] = date('Y-m-d H:i:s');
+
+			$nombre = $fam->apodo ?: $fam->nombre;
 
 			if ($n_apuntados < $evento->participantes_max) {
 				$vals[] = null;
@@ -106,7 +135,6 @@ class Eventos_usuarios extends LiteRecord
             return;
         }
 		$sql = 'INSERT INTO eventos_usuarios (eventos_aid, usuarios_aid, creado, reserva) VALUES ' . implode(', ', $keys);
-		#_var::die([$sql, $vals]);
 		parent::query($sql, $vals);
 		
 		if (empty($en_evento)) {
@@ -139,7 +167,7 @@ class Eventos_usuarios extends LiteRecord
 	}
 
     #
-    public function desapuntarse($eventos_aid)
+    public function desapuntarse($eventos_aid, $usuarios_aid=null)
     {
 		$apuntado = self::apuntado($eventos_aid);
 		if ( ! $apuntado) {
@@ -147,7 +175,7 @@ class Eventos_usuarios extends LiteRecord
 		}
 		
 		$vals[] = $eventos_aid;
-		$vals[] = Session::get('aid');
+		$vals[] = $usuarios_aid ?: Session::get('aid');
 
 		$sql = 'DELETE FROM eventos_usuarios WHERE eventos_aid=? AND usuarios_aid=?';
 		parent::query($sql, $vals);	
@@ -193,8 +221,21 @@ class Eventos_usuarios extends LiteRecord
     #
     public function misReservas()
     {
-		$sql = 'SELECT eve.* FROM eventos_usuarios e_u, eventos eve
-			WHERE e_u.usuarios_aid=? AND e_u.eventos_aid=eve.aid';
-		return parent::all($sql, [Session::get('aid')]);	
+		$keys[] = '?';
+		$vals[] = Session::get('aid');
+
+		$menores = (new Usuarios_menores)->inscritos();
+		foreach ($menores as $men) {
+			$keys[] = '?';
+			$vals[] = $men->aid;
+		}
+		$keys = implode(', ', $keys);
+
+		$sql = "SELECT eve.* FROM eventos_usuarios e_u, eventos eve
+			WHERE e_u.usuarios_aid IN ($keys) AND e_u.eventos_aid=eve.aid";
+
+		$eventos = parent::all($sql, $vals);
+
+		return parent::arrayBy($eventos);
 	}
 }

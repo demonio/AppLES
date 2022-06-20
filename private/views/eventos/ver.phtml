@@ -57,11 +57,7 @@ $tipos = [
         <?php endif; ?>
 
         <?php if ($evento->aceptado): ?>
-            <?php if ($apuntado): ?>
-                <a role="button" data-ajax=".ajax.show" href="/participantes/reservas/desapuntarse/<?=$evento->aid?>"><?=_('Desapuntarse')?></a>
-            <?php else: ?>
-                <a role="button" data-ajax=".ajax.show" href="/participantes/reservas/apuntarse/<?=$evento->aid?>"><?=_('Apuntarse')?></a>
-            <?php endif; ?>
+            <a role="button" data-ajax=".ajax.show" href="/participantes/reservas/apuntados/<?=$evento->aid?>"><?=empty($apuntado)?_('Apuntarse'):_('Desapuntarse')?></a>
         <?php endif; ?>
     </footer>
 </article>

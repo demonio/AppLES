@@ -12,9 +12,10 @@ class ReservasController extends RegistradosController
     }
 
     #
-    public function apuntarse($aid)
+    public function apuntados($aid)
     {
         $this->menores = (new Usuarios_menores)->inscritos();
+        $this->apuntado = (new Eventos_usuarios)->apuntado($aid);
         $this->eventos_aid = $aid;
     }
 
@@ -22,13 +23,6 @@ class ReservasController extends RegistradosController
     public function confirmar()
     {
         (new Eventos_usuarios)->apuntarse(Input::post());
-        return Redirect::to('/participantes/reservas');
-    }
-
-    #
-    public function desapuntarse($aid)
-    {
-        (new Eventos_usuarios)->desapuntarse($aid);
         return Redirect::to('/participantes/reservas');
     }
 }
