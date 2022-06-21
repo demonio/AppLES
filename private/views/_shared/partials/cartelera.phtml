@@ -1,6 +1,10 @@
 <?php
 $eventos = View::getVar('eventos');
 $apuntados = View::getVar('apuntados');
+$controller_name = View::getVar('controller_name');
+$module_name = View::getVar('module_name');
+$controller = empty($module_name)
+    ? $controller_name : "$module_name/$controller_name";
 $reservas = View::getVar('reservas');
 ?>
 <div id="grid" class="cartelera" data-columns>
@@ -18,7 +22,7 @@ $reservas = View::getVar('reservas');
         $n_reservas = empty($reservas[$eve->aid]) ? 0 : count($reservas[$eve->aid]);
         ?>
         <article>
-            <a href="/eventos/ver/<?=$eve->aid?>">
+            <a href="/<?=$controller?>/ver/<?=$eve->aid?>">
                 <?php if ( ! $eve->aceptado): ?>
                     <div class="por-aceptar"><?=_('Por aceptar')?></div>
                     <div class="por-aceptar-velo"></div>

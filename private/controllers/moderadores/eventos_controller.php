@@ -21,15 +21,24 @@ class EventosController extends RegistradosController
     }
 
     #
-    public function formulario($aid='')
-    {
-        #$this->evento = (new Eventos)->miEvento($aid);
-    }
-
-    #
     public function aceptar($aid)
     {
         (new Eventos)->aceptar($aid);
         Redirect::to('/moderadores/eventos');
+    }
+
+    #
+    public function formulario($aid='')
+    {
+    }
+
+    #
+    public function ver($aid)
+    {
+        $this->evento = (new Eventos)->uno($aid);
+        $this->apuntado = (new Eventos_usuarios)->apuntado($aid);
+        $this->apuntados = (new Eventos_usuarios)->apuntados([$this->evento]);
+        $this->reservas = (new Eventos_usuarios)->reservas([$this->evento]);
+        View::setPath('eventos');
     }
 }

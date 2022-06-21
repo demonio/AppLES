@@ -25,4 +25,14 @@ class ReservasController extends RegistradosController
         (new Eventos_usuarios)->apuntarse(Input::post());
         return Redirect::to('/participantes/reservas');
     }
+
+    #
+    public function ver($aid)
+    {
+        $this->evento = (new Eventos)->uno($aid);
+        $this->apuntado = (new Eventos_usuarios)->apuntado($aid);
+        $this->apuntados = (new Eventos_usuarios)->apuntados([$this->evento]);
+        $this->reservas = (new Eventos_usuarios)->reservas([$this->evento]);
+        View::setPath('eventos');
+    }
 }

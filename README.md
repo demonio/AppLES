@@ -33,11 +33,12 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 - Inscribir menores a eventos.
 - Mostrar los eventos donde están apuntados los menores.
 - Desapuntar menores de eventos.
+- Mantener navegación en la misma sección al volver a atrás.
 
 ## Duda
 - Correo al desapuntarse. ¿Para?
 - Poner un id correlativo visible. ¿Utilidad?
+- Poner turno mañana y tarde en el formulario del evento. ¿Para?
 
 ## Por hacer
-- Poner turno mañana y tarde en el formulario del evento.
-- Ver si la navegación se puede mantener para volver a atrás.
+- Lo que se diga en la próxima reunión.

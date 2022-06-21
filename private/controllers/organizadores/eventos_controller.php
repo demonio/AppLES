@@ -49,4 +49,14 @@ class EventosController extends RegistradosController
         (new Eventos)->salvarEvento($_POST);
         Redirect::to('/organizadores/eventos');
     }
+
+    #
+    public function ver($aid)
+    {
+        $this->evento = (new Eventos)->uno($aid);
+        $this->apuntado = (new Eventos_usuarios)->apuntado($aid);
+        $this->apuntados = (new Eventos_usuarios)->apuntados([$this->evento]);
+        $this->reservas = (new Eventos_usuarios)->reservas([$this->evento]);
+        View::setPath('eventos');
+    }
 }
