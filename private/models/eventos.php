@@ -127,9 +127,10 @@ class Eventos extends LiteRecord
 		$vals[] = empty($data['etiquetas'])
 			? '' 
 			: '[' . implode('], [', $data['etiquetas']) . ']';
-
-		$vals[] = null;
-		$vals[] = null;
+		if ( ! empty($data['aid'])) {
+			$vals[] = null;
+			$vals[] = null;
+		}
 		$vals[] = $data['comienza'] ?: null;
 
 		$data['termina'] = $data['termina'] ?: null;
