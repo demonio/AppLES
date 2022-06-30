@@ -38,7 +38,16 @@ Aplicación para las Ludo Ergo Sum y jornadas similares que gestionan actividade
 ## Duda
 - Correo al desapuntarse. ¿Para?
 - Poner un id correlativo visible. ¿Utilidad?
-- Poner turno mañana y tarde en el formulario del evento. ¿Para?
 
 ## Por hacer
 - Lo que se diga en la próxima reunión.
+- No se puede desapuntar si eres reserva.
+- Falta el enlace de mostrar contraseña en la pestaña de Registrar.
+- Poner los label de los campos de texto de los formularios.
+- Cambiar "oscilar" -> "estar".
+- El menú siempre fijo en pantalla por encima de tablet.
+- Una vez aceptado un evento, el organizador no puede modificarlo.
+- Permitir el CRUD de eventos a moderadores.
+- Opción en los eventos, para que el organizador pueda escribir al moderador.
+- Enviar alerta de fecha terminar por debajo de comenzar.
+- Enviar alerta de fechas fuera de turnos de 4h. 10-14 y 16-20.
